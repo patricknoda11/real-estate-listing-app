@@ -1,5 +1,5 @@
-import env from "dotenv";
-const mysql = require("mysql2/promise");
+const mysql = require("../node_modules/mysql2/promise");
+const env = require("../node_modules/dotenv");
 env.config();
 
 const queryPool = mysql.createPool({
@@ -9,3 +9,5 @@ const queryPool = mysql.createPool({
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
 });
+
+module.exports = queryPool;
