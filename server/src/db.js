@@ -1,3 +1,5 @@
+"use strict";
+
 const mysql = require("../node_modules/mysql2/promise");
 const env = require("../node_modules/dotenv");
 env.config();
