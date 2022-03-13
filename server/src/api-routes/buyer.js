@@ -28,11 +28,11 @@ router.post("/", async (request, response) => {
       typePreference,
       budget,
     } = request.body;
-    const newBuyer = await pool.query(
+    await pool.query(
       "INSERT INTO Buyer (phoneNumber, email, password, name, birthday, typePreference, budget) VALUES (?, ?, ?, ?, ?, ?, ?)",
       [phoneNumber, email, password, name, birthday, typePreference, budget]
     );
-    response.json(newBuyer);
+    response.json(`New buyer, ${name} was added`);
   } catch (error) {
     console.error(error.message);
   }

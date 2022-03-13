@@ -29,7 +29,7 @@ router.post("/", async (request, response) => {
       preferredMeetingDuration,
       preferredInPersonMeetingLocation,
     } = request.body;
-    const newAgent = await pool.query(
+    await pool.query(
       "INSERT INTO Agent (phoneNumber, email, password, name, birthday, yearsExperience, preferredMeetingDuration, preferredInPersonMeetingLocation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
       [
         phoneNumber,
@@ -42,7 +42,7 @@ router.post("/", async (request, response) => {
         preferredInPersonMeetingLocation,
       ]
     );
-    response.json(newAgent);
+    response.json(`New agent, ${name} was added`);
   } catch (error) {
     console.error(error.message);
   }
