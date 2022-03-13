@@ -1,182 +1,187 @@
 CREATE DATABASE real_estate_simulation;
--- DATE − A date in YYYY-MM-DD format, between 1000-01-01 and 9999-12-31.
--- VARCHAR(M) − A variable-length string between 1 and 255 characters in length. For example, VARCHAR(25). You must define a length when creating a VARCHAR field.
--- TIME − Stores the time in a HH:MM:SS format.
 
 CREATE TABLE Stager (
-	stagerPhoneNumber int,
-	stagerName varchar(30),
-	yearsExperience int,
+	stagerPhoneNumber BIGINT,
+	stagerName VARCHAR(30),
+	yearsExperience INT,
 	PRIMARY KEY (stagerPhoneNumber)
 );
 
 CREATE TABLE Contracts (
-	stagerPhoneNumber int,
-	userPhoneNumber int,
-	PRIMARY KEY (stagerPhoneNumber, userPhoneNumber),
-	FOREIGN KEY (stagerPhoneNumber) REFERENCES Stager
+	stagerPhoneNumber BIGINT,
+	accId INT,
+	PRIMARY KEY (stagerPhoneNumber, accId),
+	FOREIGN KEY (stagerPhoneNumber) REFERENCES Stager(stagerPhoneNumber)
 		ON DELETE CASCADE
-		ON UPDATE CASCADE
-	FOREIGN KEY (userPhoneNumber) REFERENCES Agent
-		ON DELETE CASCADE
-		ON UPDATE CASCADE
-);
-
-ImageUploads (
-	url varchar(80),
-	title varchar(80),
-	Width int, 
-	Height int, 
-	description varchar(80),
-	formatType varchar(80),
-	Resolution, int
-	listingId int,
-	PRIMARY KEY (url)
-	FOREIGN KEY (listingId) REFERENCES Listing
-		ON DELETE CASCADE
-		ON UPDATE CASCADE
-	FOREIGN KEY (width, height) REFERENCES WidthHeight
-		ON DELETE CASCADE
-		ON UPDATE CASCADE
-	FOREIGN KEY (formatType, resolution) REFERENCES FormatTypeResolution
+		ON UPDATE CASCADE,
+	FOREIGN KEY (accId) REFERENCES Agent(accId)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );
 
-WidthHeight (
-	width int,
-	height int,
-	resolution int,
+CREATE TABLE ImageUploads (
+	imageId VARCHAR(80),
+	title VARCHAR(80),
+	width INT, 
+	height INT, 
+	description VARCHAR(80),
+	formatType VARCHAR(80),
+	resolution INT,
+	listingId INT,
+	PRIMARY KEY (imageId),
+	FOREIGN KEY (listingId) REFERENCES ListingOwnsHas (listingId)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	FOREIGN KEY (width, height) REFERENCES WidthHeight (width, height)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	FOREIGN KEY (formatType, resolution) REFERENCES FormatTypeResolution (formatType, resolution)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+);
+
+CREATE TABLE WidthHeight (
+	width INT,
+	height INT,
+	resolution INT,
 	PRIMARY KEY(width, height)
 );
 
-FormatTypeResolution (
-	formatType varchar(80),
-	resolution int,
-	quality varchar(80),
+CREATE TABLE FormatTypeResolution (
+	formatType VARCHAR(80),
+	resolution INT,
+	quality VARCHAR(80),
 	PRIMARY KEY (formatType, resolution)
 );
 
 CREATE TABLE ListingOwnsHas (
-	listingId int,
-	ownerPhoneNumber int NOT NULL,
-	userPhoneNumber int,
-	price int,
-	PRIMARY KEY (listingId)
-	FOREIGN KEY (ownerPhoneNumber) REFERENCES Owner
+	listingId INT AUTO_INCREMENT,
+	ownerPhoneNumber BIGINT NOT NULL,
+	accId INT,
+	price INT,
+	PRIMARY KEY (listingId),
+	FOREIGN KEY (ownerPhoneNumber) REFERENCES Owner (ownerPhoneNumber)
 		ON DELETE CASCADE
-		ON UPDATE CASCADE
-	FOREIGN KEY (userPhoneNumber) REFERENCES Agent
+		ON UPDATE CASCADE,
+	FOREIGN KEY (accId) REFERENCES Agent(accId)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );
 
 CREATE TABLE Owner (
-	ownerPhoneNumber int,
-	ownerName varchar(80),
+	ownerPhoneNumber BIGINT,
+	ownerName VARCHAR(80),
 	PRIMARY KEY (ownerPhoneNumber)
 );
 
 CREATE TABLE PropertyHas (
-    listingId int NOT NULL, 
-    location varchar(80), 
-    type varchar(80),
-    numberOfRooms int, 
-    numberOfBathrooms int, 
-    interiorSize int,
-    landSize int
+    listingId INT AUTO_INCREMENT NOT NULL, 
+    location VARCHAR(80), 
+    type VARCHAR(80),
+    numberOfRooms INT, 
+    numberOfBathrooms INT, 
+    interiorSize INT,
+    landSize INT,
     PRIMARY KEY(listingId, location),
     UNIQUE (listingId),
-    FOREIGN KEY(listingId) REFERENCES Listing 
+    FOREIGN KEY(listingId) REFERENCES ListingOwnsHas(listingId) 
     ON DELETE CASCADE
     ON UPDATE CASCADE
-)
-
-CREATE TABLE AccountHas(
-    accId int, 
-    userPhoneNumber int, 
-    username varchar(80), 
-    acctName varchar(80), 
-    email varchar(80), 
-    password varchar(80),
-    PRIMARY KEY(accId),
-    FOREIGN KEY(userPhoneNumber) REFERENCES User 
-	    ON DELETE CASCADE 
-	    ON UPDATE CASCADE
 );
 
-CREATE TABLE Manages(
-    accId int,
-    adminId int,
-    PRIMARY KEY(accId, adminId),
-    FOREIGN KEY(accId) REFERENCES Account 
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
-    FOREIGN KEY(adminId) REFERENCES Admin 
-	    ON DELETE CASCADE
-        ON UPDATE CASCADE
-);
 
 CREATE TABLE Admin(
-    adminId int,
+    adminId INT AUTO_INCREMENT,
     PRIMARY KEY(adminID)
 );
 
+CREATE TABLE ManageBuyers (
+    adminId INT,
+    buyerAcctId INT,
+    PRIMARY KEY (adminId, buyerAcctId),
+    FOREIGN KEY (adminID) REFERENCES Admin (adminId)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (buyerAcctId) REFERENCES Buyer (accId)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE ManageAgents (
+    adminId INT,
+    agentAcctId INT,
+    PRIMARY KEY (adminId, agentAcctId),
+    FOREIGN KEY (adminID) REFERENCES Admin (adminId)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (agentAcctId) REFERENCES Buyer (accId)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
 CREATE TABLE Buyer (
-    userPhoneNumber int,
-    name varchar(80), 
-    birthday Date, 
-    typePreference varchar(80), 
-    budget int,
-    PRIMARY KEY(userPhoneNumber)
+    accId INT AUTO_INCREMENT,
+    phoneNumber BIGINT,
+    email VARCHAR(80),
+    password VARCHAR(80),
+	name VARCHAR(80),
+	birthday DATE,
+    typePreference VARCHAR(80), 
+    budget INT,
+    PRIMARY KEY(accId),
+    UNIQUE(phoneNumber),
+    UNIQUE(email)
 ); 
 
 CREATE TABLE Agent (
-    userPhoneNumber int, 
-    name varchar(80), 
-    birthday Date, 
-    yearsExperience int,
-    preferredMeetingDuration int,
-    preferredInPersonMeetingLocation varchar(80),
-    PRIMARY KEY(userPhoneNumber)
+    accId INT AUTO_INCREMENT,
+    phoneNumber BIGINT,
+    email VARCHAR(80),
+    password VARCHAR(80),
+	name VARCHAR(80),
+	birthday DATE,
+    yearsExperience INT,
+    preferredMeetingDuration INT,
+    preferredInPersonMeetingLocation VARCHAR(80),
+    PRIMARY KEY(accId),
+    UNIQUE(phoneNumber),
+    UNIQUE(email)
 );
 
 CREATE TABLE AppointmentRequestsResponds(
-apptDate Date,
-agentPhoneNumber int, 
-description varchar(80),
-type varchar(80), 
-buyerPhoneNumber int, 
-time int, 
-PRIMARY KEY(agentPhoneNumber, buyerPhoneNumber, apptDate, time),
-FOREIGN KEY (agentPhoneNumber, type) REFERENCES R1
-	ON DELETE CASCADE
-	ON UPDATE CASCADE
-FOREIGN KEY (apptDate, agentPhoneNumber, buyerPhoneNumber) REFERENCES R2
-	ON DELETE CASCADE
-	ON UPDATE CASCADE
-FOREIGN KEY (agentPhoneNumber) REFERENCES Agent 
-         ON DELETE CASCADE
-ON UPDATE CASCADE
-FOREIGN KEY (buyerPhoneNumber) REFERENCES Buyer
-	ON DELETE CASCADE 
-	ON UPDATE CASCADE
+    apptDate DATE,
+    agentAcctId INT, 
+    description VARCHAR(80),
+    apptType VARCHAR(80), 
+    buyerAcctId INT, 
+    timeOfDay TIME, 
+    PRIMARY KEY(agentAcctId, buyerAcctId, apptDate, timeOfDay),
+    FOREIGN KEY (agentAcctId, apptType) REFERENCES R1(agentAcctId, apptType)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (apptDate, agentAcctId, buyerAcctId) REFERENCES R2(apptDate, agentAcctId, buyerAcctId)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (agentAcctId) REFERENCES Agent(accId)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (buyerAcctId) REFERENCES Buyer(accId)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE R1 (
-	agentPhoneNumber int,
-	type varchar(80), 
-	location varchar(80),
-	duration int
-	PRIMARY KEY(agentPhoneNumber, type)
+	agentAcctId INT,
+	apptType VARCHAR(80), 
+	location VARCHAR(80),
+	duration INT,
+	PRIMARY KEY(agentAcctId, apptType)
 );
 
 CREATE TABLE R2(
-	apptDate Date,
-agentPhoneNumber int,
-buyerPhoneNumber int,
-apptName varchar(80),
-PRIMARY KEY(apptDate, agentPhoneNumber, buyerPhoneNumber)
+	apptDate DATE,
+    agentAcctId INT,
+    buyerAcctId INT,
+    apptName VARCHAR(80),
+    PRIMARY KEY(apptDate, agentAcctId, buyerAcctId)
 );
-
-

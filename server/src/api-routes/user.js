@@ -3,7 +3,7 @@ const pool = require("../db.js");
 const router = express.Router();
 
 router.get("/", (request, response) => {
-  response.send("home");
+  response.send("user");
 });
 
 module.exports = router;
