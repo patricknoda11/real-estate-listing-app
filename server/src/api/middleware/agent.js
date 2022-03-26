@@ -11,9 +11,9 @@ router.get("/", async (request, response) => {
       "SELECT * FROM Agent WHERE email=? AND password=?",
       [email, password]
     );
-    response.json(agentAcctInfo);
+    response.status(200).send(agentAcctInfo);
   } catch (error) {
-    console.error(error.message);
+    response.status(400).send(error.message);
   }
 });
 
@@ -42,9 +42,9 @@ router.post("/", async (request, response) => {
         preferredInPersonMeetingLocation,
       ]
     );
-    response.json(`New agent, ${name} was added`);
+    response.status(200).send(`New agent, ${name} was added`);
   } catch (error) {
-    console.error(error.message);
+    response.status(400).send(error.message);
   }
 });
 
@@ -75,9 +75,9 @@ router.put("/", async (request, response) => {
         accId,
       ]
     );
-    response.json(`Agent information for ${name} was updated`);
+    response.status(200).send(`Agent information for ${name} was updated`);
   } catch (error) {
-    console.error(error);
+    response.status(400).send(error.message);
   }
 });
 
@@ -88,9 +88,9 @@ router.delete("/", async (request, response) => {
       email,
       password,
     ]);
-    response.json("The agent was successfully deleted");
+    response.status(200).send("The agent was successfully deleted");
   } catch (error) {
-    console.error(error);
+    response.status(400).send(error.message);
   }
 });
 
