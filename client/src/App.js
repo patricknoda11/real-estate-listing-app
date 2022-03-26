@@ -7,6 +7,10 @@ import About from "./views/About";
 import Listing from "./views/Listing";
 import Appointment from "./views/Appointment";
 import CreateAgent from "./components/CreateAgent";
+import CreateBuyer from "./components/CreateBuyer";
+import CreateAppointment from "./components/CreateAppointment";
+import CreateListing from "./components/CreateListing";
+import GetListing from "./components/GetListing";
 
 const App = () => {
   return (
@@ -20,7 +24,7 @@ const App = () => {
     //     <Route path="/listing" component={Listing} />
     //   </Switch>
     // </Router>
-    <CreateAgent />
+    <GetListing />
   );
 };
 

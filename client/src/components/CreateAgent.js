@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import {MenuItem, Select} from "@mui/material";
 
 const CreateAgent = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -30,10 +31,29 @@ const CreateAgent = () => {
     setPreferredInPersonMeetingLocation("");
   };
 
+  const onSubmitForm = async e => {
+    e.preventDefault();
+    try {
+      const body = { phoneNumber, email, password, name, birthday, yearsExperience, preferredInPersonMeetingLocation };
+      const response = await fetch(" http://localhost:8000/Agents/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
+      window.location = "/";
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const handleChange = (event) => {
+    setPreferredInPersonMeetingLocation(event.target.value);
+  };
+
   return (
     <Fragment>
       <h1 className="text-center mt-5">Register Agent </h1>
-      <form>
+      <form onSubmit={onSubmitForm}>
         <div className="form-control">
           <label>Phone Number</label>
           <input
@@ -106,32 +126,24 @@ const CreateAgent = () => {
         </div>
         <div className="form-control">
           <label>Preferred Meeting location</label>
-          <input
-            type="radio"
-            id="online"
-            value="Online"
-            onChange={(e) =>
-              setPreferredInPersonMeetingLocation(e.target.value)
-            }
-          />
-          <label for="online">Online</label>
-          <br></br>
-          <input
-            type="radio"
-            id="in_person"
-            value="In-Person"
-            onChange={(e) =>
-              setPreferredInPersonMeetingLocation(e.target.value)
-            }
-          />
-          <label for="in_person">In-Person</label>
-          <br></br>
+          <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={preferredInPersonMeetingLocation}
+              label="Age"
+              onChange={handleChange}
+          >
+            <MenuItem value={"online"}>online</MenuItem>
+            <MenuItem value={"in-person"}>in-person</MenuItem>
+          </Select>
         </div>
         <button className="btn btn-success">Register Agent</button>
       </form>
     </Fragment>
   );
 };
+
+
 
 export default CreateAgent;
 
