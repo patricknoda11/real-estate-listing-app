@@ -1,7 +1,7 @@
 "use strict";
 
-const mysql = require("../node_modules/mysql2/promise");
-const env = require("../node_modules/dotenv");
+const mysql = require("mysql2/promise");
+const env = require("dotenv");
 env.config();
 
 const pool = mysql.createPool({

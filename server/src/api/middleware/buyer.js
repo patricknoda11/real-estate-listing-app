@@ -13,7 +13,7 @@ router.get("/", async (request, response) => {
     );
     response.json(buyerAcctInfo);
   } catch (error) {
-    console.error(error.message);
+    response.status(400).send(error.message);
   }
 });
 
@@ -34,7 +34,7 @@ router.post("/", async (request, response) => {
     );
     response.json(`New buyer, ${name} was added`);
   } catch (error) {
-    console.error(error.message);
+    response.status(400).send(error.message);
   }
 });
 
@@ -65,7 +65,7 @@ router.put("/", async (request, response) => {
     );
     response.json(`Buyer information for ${name} was updated`);
   } catch (error) {
-    console.error(error);
+    response.status(400).send(error.message);
   }
 });
 
@@ -78,7 +78,7 @@ router.delete("/", async (request, response) => {
     );
     response.json("The buyer was successfully deleted");
   } catch (error) {
-    console.error(error);
+    response.status(400).send(error.message);
   }
 });
 
