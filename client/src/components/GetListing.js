@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from "react";
 import {Paper, Container, FormControl, FormGroup, InputLabel, MenuItem, Select, Alert, IconButton} from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 const CreateListing = () => {
     const [ownerPhoneNumber, setOwnerPhoneNumber] = useState("");
@@ -11,6 +13,7 @@ const CreateListing = () => {
         e.preventDefault();
         setOwnerPhoneNumber("");
         setPrice("");
+        setListings([])
     };
 
     const handleClick = async () => {
@@ -28,20 +31,20 @@ const CreateListing = () => {
             <h1 className="text-center mt-5">Search Listings </h1>
             <form>
                 <div className="form-control">
-                    <label>Phone Number</label>
-                    <input
-                        type="tel"
-                        placeholder="Enter phone number"
-                        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                        className="form-control"
-                        value={ownerPhoneNumber}
-                        onChange={(e) => setOwnerPhoneNumber(e.target.value)}
-                    />
-                    {/*<PhoneInput*/}
+                    {/*<label>Phone Number</label>*/}
+                    {/*<input*/}
+                    {/*    type="tel"*/}
                     {/*    placeholder="Enter phone number"*/}
+                    {/*    pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"*/}
                     {/*    className="form-control"*/}
                     {/*    value={ownerPhoneNumber}*/}
-                    {/*    onChange={setOwnerPhoneNumber}/>*/}
+                    {/*    onChange={(e) => setOwnerPhoneNumber(e.target.value)}*/}
+                    {/*/>*/}
+                    <PhoneInput
+                        placeholder="Enter phone number"
+                        className="form-control"
+                        value={ownerPhoneNumber}
+                        onChange={setOwnerPhoneNumber}/>
                 </div>
                 <div className="form-control">
                     <label>Price</label>

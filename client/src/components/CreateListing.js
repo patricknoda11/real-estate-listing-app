@@ -34,7 +34,7 @@ const CreateListing = () => {
 
     return (
         <Fragment>
-            <h1 className="text-center mt-5">Register Buyer </h1>
+            <h1 className="text-center mt-5">Create Listing </h1>
             <form onSubmit={onSubmitForm}>
                 <div className="form-control">
                     <label>Phone Number</label>
