@@ -36,13 +36,12 @@ router.post("/", async (request, response) => {
 });
 
 // TODO: projection operation
-router.get("/", async (request, response) => {
+router.get("/", async (_request, response) => {
   try {
     const sqlQuery =
       "SELECT name, agentEmail, phoneNumber, preferredMeetingDuration, preferredInPersonMeetingLocation FROM Agent;";
-    const { email, password } = request.body;
-    const agentAcctInfo = await pool.query(sqlQuery, [email, password]);
-    response.status(200).send(agentAcctInfo);
+    const agentAcctInfo = await pool.query(sqlQuery);
+    response.status(200).send(agentAcctInfo[0]);
   } catch (error) {
     response.status(400).send(error.message);
   }
@@ -85,7 +84,7 @@ router.put("/", async (request, response) => {
 router.delete("/", async (request, response) => {
   try {
     const { email, password } = request.body;
-    await pool.query("DELETE FROM Agent WHERE email=? AND password=?", [
+    await pool.query("DELETE FROM Agent WHERE email=? AND password=?;", [
       email,
       password,
     ]);

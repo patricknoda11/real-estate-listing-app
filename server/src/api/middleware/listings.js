@@ -58,30 +58,14 @@ router.post("/", async (request, response) => {
 // TODO: Selection
 router.get("/", async (request, response) => {
   try {
-    let {
-      numBathrooms,
-      interiorSize,
-      landSize,
-      startingPrice,
-      maximumPrice,
-      orderBy,
-    } = request.body;
-
-    // ensure that orderBy is either asc or desc (defaults to desc)
-    orderBy = orderBy.toLowerCase() === "asc" ? "asc" : "desc";
+    let { numBathrooms, interiorSize, landSize, startingPrice, maximumPrice } =
+      request.body;
 
     const listings = await pool.query(
-      "SELECT price, numberOfBathrooms, interiorSize, landSize, location FROM listingOwnsHas, PropertyHas WHERE listingOwnsHas.listingId = PropertyHas.listingId AND numberOfBathrooms >= ? AND interiorSize >= ? AND landSize >= ? AND price BETWEEN ? And ? ORDER BY price ?",
-      [
-        numBathrooms,
-        interiorSize,
-        landSize,
-        startingPrice,
-        maximumPrice,
-        orderBy,
-      ]
+      "SELECT price, numberOfBathrooms, interiorSize, landSize, location FROM listingOwnsHas, PropertyHas WHERE listingOwnsHas.listingAddress = PropertyHas.listingAddress AND numberOfBathrooms >= ? AND interiorSize >= ? AND landSize >= ? AND price BETWEEN ? And ?;",
+      [numBathrooms, interiorSize, landSize, startingPrice, maximumPrice]
     );
-    response.status(200).send(listings);
+    response.status(200).send(listings[0]);
   } catch (error) {
     response.status(400).send(error.message);
   }

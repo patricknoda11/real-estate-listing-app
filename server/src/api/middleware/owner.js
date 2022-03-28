@@ -12,7 +12,7 @@ router.post("/", async (request, response) => {
     await pool.query(sqlQuery, [ownerPhoneNumber, ownerName]);
     response
       .status(200)
-      .send(`New Owner with email, ${ownerPhoneNumber} was added`);
+      .send(`New Owner with phone number, ${ownerPhoneNumber} was added`);
   } catch (error) {
     response.status(400).send(error.message);
   }

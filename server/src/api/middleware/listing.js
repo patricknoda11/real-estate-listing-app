@@ -13,7 +13,7 @@ router.get("/", async (request, response) => {
     const sqlQuery =
       "SELECT * FROM ListingOwnsHas, PropertyHas, Owner, Agent WHERE ListingOwnsHas.agentEmail=Agent.agentEmail AND ListingOwnsHas.ownerPhoneNumber=Owner.ownerPhoneNumber AND PropertyHas.listingAddress=ListingOwnsHas.listingAddress AND ListingOwnsHas.listingAddress=?";
     const queryResponse = await pool.query(sqlQuery, [listingAddress]);
-    response.status(200).send(queryResponse);
+    response.status(200).send(queryResponse[0]);
   } catch (error) {
     response.status(400).send(error.message);
   }

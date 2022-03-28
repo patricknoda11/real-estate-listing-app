@@ -4,6 +4,7 @@ const express = require("express");
 const pool = require("../db.js");
 const router = express.Router();
 
+// TODO: NESTED AGGREGATION
 router.get("/", async (request, response) => {
   try {
     const { count } = request.body;
@@ -11,7 +12,7 @@ router.get("/", async (request, response) => {
     const sqlQuery =
       "SELECT Agent.name, Max(price) FROM Agent, ListingOwnsHas WHERE Agent.agentEmail=ListingOwnsHas.agentEmail GROUP BY Agent.agentEmail HAVING ? <= (SELECT COUNT(*) FROM ListingOwnsHas LOH2 WHERE Agent.agentEmail=LOH2.agentEmail);";
     const queryResponse = await pool.query(sqlQuery, [count]);
-    response.status(200).send(queryResponse);
+    response.status(200).send(queryResponse[0]);
   } catch (error) {
     response.status(400).send(error.message);
   }
