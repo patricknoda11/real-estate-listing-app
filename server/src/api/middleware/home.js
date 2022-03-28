@@ -3,9 +3,6 @@
 const express = require("express");
 const pool = require("../db.js");
 const router = express.Router();
-
-router.get("/", (request, response) => {
-  response.send("home");
-});
+// TODO: implement home route
 
 module.exports = router;

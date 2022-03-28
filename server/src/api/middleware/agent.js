@@ -4,21 +4,11 @@ const express = require("express");
 const pool = require("../db.js");
 const router = express.Router();
 
-router.get("/", async (request, response) => {
-  try {
-    const { email, password } = request.body;
-    const agentAcctInfo = await pool.query(
-      "SELECT * FROM Agent WHERE email=? AND password=?",
-      [email, password]
-    );
-    response.status(200).send(agentAcctInfo);
-  } catch (error) {
-    response.status(400).send(error.message);
-  }
-});
-
+// TODO:Insert operation
 router.post("/", async (request, response) => {
   try {
+    const sqlQuery =
+      "INSERT INTO Agent (phoneNumber, agentEmail, password, name, birthday, yearsExperience, preferredMeetingDuration, preferredInPersonMeetingLocation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     const {
       phoneNumber,
       email,
@@ -29,20 +19,30 @@ router.post("/", async (request, response) => {
       preferredMeetingDuration,
       preferredInPersonMeetingLocation,
     } = request.body;
-    await pool.query(
-      "INSERT INTO Agent (phoneNumber, email, password, name, birthday, yearsExperience, preferredMeetingDuration, preferredInPersonMeetingLocation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-      [
-        phoneNumber,
-        email,
-        password,
-        name,
-        birthday,
-        yearsExperience,
-        preferredMeetingDuration,
-        preferredInPersonMeetingLocation,
-      ]
-    );
+    await pool.query(sqlQuery, [
+      phoneNumber,
+      email,
+      password,
+      name,
+      birthday,
+      yearsExperience,
+      preferredMeetingDuration,
+      preferredInPersonMeetingLocation,
+    ]);
     response.status(200).send(`New agent, ${name} was added`);
+  } catch (error) {
+    response.status(400).send(error.message);
+  }
+});
+
+// TODO: projection operation
+router.get("/", async (request, response) => {
+  try {
+    const sqlQuery =
+      "SELECT name, agentEmail, phoneNumber, preferredMeetingDuration, preferredInPersonMeetingLocation FROM Agent;";
+    const { email, password } = request.body;
+    const agentAcctInfo = await pool.query(sqlQuery, [email, password]);
+    response.status(200).send(agentAcctInfo);
   } catch (error) {
     response.status(400).send(error.message);
   }
@@ -51,8 +51,8 @@ router.post("/", async (request, response) => {
 router.put("/", async (request, response) => {
   try {
     const {
-      accId,
-      phoneNumber,
+      prvPhoneNumber,
+      currPhoneNumber,
       email,
       password,
       name,
@@ -62,9 +62,9 @@ router.put("/", async (request, response) => {
       preferredInPersonMeetingLocation,
     } = request.body;
     await pool.query(
-      "Update Agent SET phoneNumber=?, email=?, password=?, name=?, birthday=?, yearsExperience=?, preferredMeetingDuration=?, preferredInPersonMeetingLocation=? Where accId=?",
+      "Update Agent SET phoneNumber=?, email=?, password=?, name=?, birthday=?, yearsExperience=?, preferredMeetingDuration=?, preferredInPersonMeetingLocation=? Where phoneNumber=?",
       [
-        phoneNumber,
+        currPhoneNumber,
         email,
         password,
         name,
@@ -72,7 +72,7 @@ router.put("/", async (request, response) => {
         yearsExperience,
         preferredMeetingDuration,
         preferredInPersonMeetingLocation,
-        accId,
+        prvPhoneNumber,
       ]
     );
     response.status(200).send(`Agent information for ${name} was updated`);
@@ -81,6 +81,7 @@ router.put("/", async (request, response) => {
   }
 });
 
+// TODO: delete operation
 router.delete("/", async (request, response) => {
   try {
     const { email, password } = request.body;

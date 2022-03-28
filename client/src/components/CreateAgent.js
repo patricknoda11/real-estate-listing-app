@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import {MenuItem, Select} from "@mui/material";
+import { MenuItem, Select } from "@mui/material";
 
 const CreateAgent = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -14,13 +14,7 @@ const CreateAgent = () => {
     setPreferredInPersonMeetingLocation,
   ] = useState("");
 
-  const listingSearchRequest = (e) => {
-    e.preventDefault();
-    // fetch request --> server side!!!
-
-    // render
-
-    // clear the text box entrys back default
+  const clearEntries = () => {
     setPhoneNumber("");
     setEmail("");
     setPassword("");
@@ -31,16 +25,25 @@ const CreateAgent = () => {
     setPreferredInPersonMeetingLocation("");
   };
 
-  const onSubmitForm = async e => {
+  const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = { phoneNumber, email, password, name, birthday, yearsExperience, preferredInPersonMeetingLocation };
-      const response = await fetch(" http://localhost:8000/Agents/", {
+      const body = {
+        phoneNumber,
+        email,
+        password,
+        name,
+        birthday,
+        yearsExperience,
+        preferredInPersonMeetingLocation,
+      };
+      const response = await fetch(" http://localhost:5013/user/agent/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
       });
       window.location = "/";
+      clearEntries();
     } catch (err) {
       console.error(err.message);
     }
@@ -127,11 +130,11 @@ const CreateAgent = () => {
         <div className="form-control">
           <label>Preferred Meeting location</label>
           <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={preferredInPersonMeetingLocation}
-              label="Age"
-              onChange={handleChange}
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={preferredInPersonMeetingLocation}
+            label="Age"
+            onChange={handleChange}
           >
             <MenuItem value={"online"}>online</MenuItem>
             <MenuItem value={"in-person"}>in-person</MenuItem>
@@ -142,8 +145,6 @@ const CreateAgent = () => {
     </Fragment>
   );
 };
-
-
 
 export default CreateAgent;
 
