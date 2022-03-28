@@ -23,31 +23,20 @@ const CreateListing = () => {
     setPrice("");
   };
 
-  const handleClick = async () => {
-    try {
-      const body = {
-        phoneNumber,
-        email,
-        password,
-        name,
-        birthday,
-        yearsExperience,
-        preferredInPersonMeetingLocation,
-      };
-      const response = await fetch(`http://localhost:5012/listings`, {
-        method: "GET",
-        headers: {
-          "content-Type": "application/json",
-        },
-        body: JSON.stringify(),
-      });
-      const jsonData = await response.json();
-      console.log(jsonData);
-      setListings(jsonData);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
+  //   const handleClick = async () => {
+  //     try {
+  //       const response = await fetch(`http://localhost:5012/listings`, {
+  //           method: "GET",
+  //           headers:
+  //       });
+  //       const jsonData = await response.json();
+  //       console.log(jsonData);
+  //       setListings(jsonData);
+  //     } catch (err) {
+  //       console.error(err.message);
+  //     }
+  //   };
+  const handleClick = () => {};
 
   return (
     <Fragment>
