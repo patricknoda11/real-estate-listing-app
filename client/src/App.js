@@ -7,6 +7,7 @@ import Listings from "./components/Listings";
 import Listing from "./components/Listing";
 import ListingsAnalytics from "./components/ListingsAnalytics";
 import NavigationBar from "./components/NavigationBar";
+import Home from "./components/Home";
 //--------------------------------------
 import Header from "./components/Header";
 // import Agent from "./views/Agent";
@@ -70,13 +71,15 @@ const App = () => {
   <Router>
     <NavigationBar />
     <Routes>
-      <Route path="/user/owner" element={<Owner />}></Route>
-      <Route path="/user/agents" element={<Agent />}>
-        <Route path="/analytics" element={<AgentAnalytics />}></Route>
-      </Route>
-      <Route path="/listings" element={<Listings />}>
-        <Route path="/listing" element={<Listing />}></Route>
-        <Route path="/analytics" element={<ListingsAnalytics />}></Route>
+      <Route path="/" element={<Home />}>
+        <Route path="/user/owner" element={<Owner />}></Route>
+        <Route path="/user/agents" element={<Agent />}>
+          <Route path="/analytics" element={<AgentAnalytics />}></Route>
+        </Route>
+        <Route path="/listings" element={<Listings />}>
+          <Route path="/listing" element={<Listing />}></Route>
+          <Route path="/analytics" element={<ListingsAnalytics />}></Route>
+        </Route>
       </Route>
     </Routes>
   </Router>;
