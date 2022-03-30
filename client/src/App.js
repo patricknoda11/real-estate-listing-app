@@ -11,6 +11,9 @@ import NavigationBar from "./components/NavigationBar";
 import Home from "./components/Home";
 import About from "./components/About";
 import PageNotFound from "./components/PageNotFound";
+import RegisterAgentTab from "./components/RegisterAgentTab";
+import GetListing from "./components/GetListing";
+import UpdateListingTab from "./components/UpdateListingTab";
 //--------------------------------------
 // import Header from "./components/Header";
 // import Agent from "./views/Agent";
@@ -71,6 +74,7 @@ const App = () => {
   // };
 
   return (
+      // <UpdateListingTab />
     <Router>
       <NavigationBar />
       <Routes>

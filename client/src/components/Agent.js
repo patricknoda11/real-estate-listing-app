@@ -42,17 +42,18 @@ function a11yProps(index) {
 }
 
 const Agent = () => {
-  const [tab, setTab] = useState("");
+  const [tab, setTab] = useState(0);
+  const handleChange = (event, newValue) => {
+    setTab(newValue);
+  };
   return (
     <div className="flex-container-agent">
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs value={tab} onChange={(e) => setTab(e.target.value)}>
+          <Tabs value={tab} onChange={handleChange}>
             <Tab label="Create Agent" {...a11yProps(0)} />
-            <Tab label="Create Appointment" {...a11yProps(1)} />
-            <Tab label="Create Buyer" {...a11yProps(2)} />
-            <Tab label="Create Appointment" {...a11yProps(3)} />
-            <Tab label="Listing" {...a11yProps(4)} />
+            <Tab label="Delete Agent" {...a11yProps(1)} />
+            <Tab label="Get Agent" {...a11yProps(2)} />
           </Tabs>
         </Box>
         <TabPanel value={tab} index={0}>
@@ -61,33 +62,12 @@ const Agent = () => {
         <TabPanel value={tab} index={1}>
           <DeleteAgentTab />
         </TabPanel>
-        <TabPanel value={tab} index={1}>
+        <TabPanel value={tab} index={2}>
           <GetAgentsTab />
         </TabPanel>
       </Box>
     </div>
   );
-
-  //   return (
-  //     <div className="flex-container-agent">
-  //       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-  //         <Tabs value={tab} onChange={(e) => setTab(e.target.value)}>
-  //           <Tab label="Register Agent" value="1" />
-  //           <Tab label="Delete Agent" value="2" />
-  //           <Tab label="Get Agents" value="3" />
-  //         </Tabs>
-  //       </Box>
-  //       <TabPanel value="1" index={0}>
-  //         <RegisterAgentTab />
-  //       </TabPanel>
-  //       <TabPanel value="2" index={1}>
-  //         <DeleteAgentTab />
-  //       </TabPanel>
-  //       <TabPanel value="3" index={2}>
-  //         <GetAgentsTab />
-  //       </TabPanel>
-  //     </div>
-  //   );
 };
 
 export default Agent;
