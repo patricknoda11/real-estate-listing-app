@@ -1,5 +1,13 @@
+import "./styles/AgentAnalytics.scss";
+import { useEffect } from "react";
+
 const AgentAnalytics = () => {
-  return <h1>This is agent analytics Page</h1>;
+  return (
+    <div className="flex-container-agent-analytics">
+      <h1>Highest Priced Listings For Each Agent</h1>
+      <div className="content"></div>
+    </div>
+  );
 };
 
 export default AgentAnalytics;
