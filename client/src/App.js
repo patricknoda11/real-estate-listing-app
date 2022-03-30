@@ -27,8 +27,8 @@ import PageNotFound from "./components/PageNotFound";
 // import PropTypes from "prop-types";
 // import Tabs from "@mui/material/Tabs";
 // import Tab from "@mui/material/Tab";
-// import Typography from "@mui/material/Typography";
 // import Box from "@mui/material/Box";
+// import Typography from "@mui/material/Typography";
 
 // function TabPanel(props) {
 //   const { children, value, index, ...other } = props;
@@ -73,7 +73,6 @@ const App = () => {
   return (
     <Router>
       <NavigationBar />
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -86,52 +85,7 @@ const App = () => {
         <Route path="*" element={<PageNotFound />}></Route>
       </Routes>
     </Router>
-
-    // <Router>
-    //     <NavigationBar/>
-    //     <Routes>
-    //       <Route path="/" element={<Home/>}></Route>
-    //       <Route path="/query" element={<Query/>}></Route>
-    //       <Route path="/about" element={<About/>}></Route>
-    //       <Route path="*" element={<PageNotFound/>}></Route>
-    //     </Routes>
-    //   </Router>
   );
 };
 
 export default App;
-
-//   <Box sx={{ width: "100%" }}>
-//     <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-//       <Tabs
-//         value={value}
-//         onChange={handleChange}
-//         aria-label="basic tabs example"
-//       >
-//         <Tab label="Create Agent" {...a11yProps(0)} />
-//         <Tab label="Create Appointment" {...a11yProps(1)} />
-//         <Tab label="Create Buyer" {...a11yProps(2)} />
-//         <Tab label="Create Appointment" {...a11yProps(3)} />
-//         <Tab label="Listing" {...a11yProps(4)} />
-//       </Tabs>
-//     </Box>
-//     <TabPanel value={value} index={0}>
-//       <CreateAgent />
-//     </TabPanel>
-//     <TabPanel value={value} index={1}>
-//       <CreateAppointment />
-//     </TabPanel>
-//     <TabPanel value={value} index={2}>
-//       <CreateBuyer />
-//     </TabPanel>
-//     <TabPanel value={value} index={3}>
-//       <CreateAppointment />
-//     </TabPanel>
-//     <TabPanel value={value} index={4}>
-//       <CreateListing />
-//     </TabPanel>
-//     <TabPanel value={value} index={4}>
-//       <GetListing />
-//     </TabPanel>
-//   </Box>
-// ;

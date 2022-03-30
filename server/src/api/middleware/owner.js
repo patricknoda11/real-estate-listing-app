@@ -8,7 +8,9 @@ router.post("/", async (request, response) => {
   try {
     const sqlQuery =
       "INSERT INTO Owner (ownerPhoneNumber, ownerName) VALUES (?, ?);";
+    console.log(request.body);
     const { ownerPhoneNumber, ownerName } = request.body;
+    console.log(ownerName, ownerPhoneNumber);
     await pool.query(sqlQuery, [ownerPhoneNumber, ownerName]);
     response
       .status(200)

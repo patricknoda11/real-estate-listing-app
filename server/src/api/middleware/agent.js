@@ -8,10 +8,10 @@ const router = express.Router();
 router.post("/", async (request, response) => {
   try {
     const sqlQuery =
-      "INSERT INTO Agent (phoneNumber, agentEmail, password, name, birthday, yearsExperience, preferredMeetingDuration, preferredInPersonMeetingLocation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      "INSERT INTO Agent (phoneNumber, agentEmail, password, name, birthday, yearsExperience, preferredMeetingDuration, preferredInPersonMeetingLocation) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
     const {
       phoneNumber,
-      email,
+      agentEmail,
       password,
       name,
       birthday,
@@ -19,9 +19,10 @@ router.post("/", async (request, response) => {
       preferredMeetingDuration,
       preferredInPersonMeetingLocation,
     } = request.body;
-    await pool.query(sqlQuery, [
+
+    const res = await pool.query(sqlQuery, [
       phoneNumber,
-      email,
+      agentEmail,
       password,
       name,
       birthday,

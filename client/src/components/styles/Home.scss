@@ -1,0 +1,13 @@
+.flex-container-home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8rem;
+  h1 {
+    font-weight: bolder;
+    font-size: 3rem;
+    background-color: aliceblue;
+    padding: 1rem;
+    opacity: 0.75;
+  }
+}
