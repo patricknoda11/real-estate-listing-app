@@ -27,7 +27,7 @@ app.use("/user/owner", ownerRoute);
 app.use("/user/agents", agentRoute);
 app.use("/user/agents/analytics", agentAnalyticsRoute);
 app.use("/listings", listingsRoute);
-app.use("/listings/listing", listingRoute);
+app.use("/listing", listingRoute);
 app.use("/listings/analytics", listingsAnalyticsRoute);
 
 app.listen(PORT, () => {

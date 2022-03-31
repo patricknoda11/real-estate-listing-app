@@ -73,18 +73,18 @@ const App = () => {
   // };
 
   return (
-    // <UpdateListingTab />
     <Router>
       <NavigationBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/listings" element={<Listings />} />
+        <Route path="/listing" element={<Listing />} />
+        <Route path="/listing/:id" element="" />
         <Route path="/listings/analytics" element={<ListingsAnalytics />} />
         <Route path="/user/agents/analytics" element={<AgentAnalytics />} />
         <Route path="/user/owner" element={<Owner />} />
         <Route path="/user/agents" element={<Agent />} />
-
         <Route path="*" element={<PageNotFound />}></Route>
       </Routes>
     </Router>

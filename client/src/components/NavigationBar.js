@@ -16,9 +16,17 @@ const NavigationBar = () => {
         <Nav.Link href="/about" className="link">
           About
         </Nav.Link>
-        <Nav.Link href="/listings" className="link">
+        <NavDropdown title="Listings" className="link">
+          <NavDropdown.Item href="/listings">search</NavDropdown.Item>
+          {/* search listings --> /listings (POST request) search for specific listing
+          /listings/:id */}
+          <NavDropdown.Item href="/listing">update/add</NavDropdown.Item>
+          {/* create listing --> /listing (POST request) update existing listing
+          /listing/ (PUT REQUEST) */}
+        </NavDropdown>
+        {/* <Nav.Link href="/listings" className="link">
           Listings
-        </Nav.Link>
+        </Nav.Link> */}
         <Nav.Link href="/listings/analytics" className="link">
           Listing-Analytics
         </Nav.Link>
