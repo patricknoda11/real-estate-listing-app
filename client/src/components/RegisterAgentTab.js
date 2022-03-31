@@ -1,4 +1,3 @@
-import "./styles/Agent.scss";
 import { useState } from "react";
 
 const RegisterAgentTab = () => {

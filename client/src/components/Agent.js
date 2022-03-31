@@ -6,8 +6,6 @@ import RegisterAgentTab from "./RegisterAgentTab";
 import GetAgentsTab from "./GetAgentsTab";
 import DeleteAgentTab from "./DeleteAgentTab";
 
-// TODO: Implement this
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 

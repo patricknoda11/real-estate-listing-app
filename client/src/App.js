@@ -12,7 +12,6 @@ import Home from "./components/Home";
 import About from "./components/About";
 import PageNotFound from "./components/PageNotFound";
 import RegisterAgentTab from "./components/RegisterAgentTab";
-import GetListing from "./components/GetListing";
 import UpdateListingTab from "./components/UpdateListingTab";
 //--------------------------------------
 // import Header from "./components/Header";
@@ -74,7 +73,7 @@ const App = () => {
   // };
 
   return (
-      // <UpdateListingTab />
+    // <UpdateListingTab />
     <Router>
       <NavigationBar />
       <Routes>

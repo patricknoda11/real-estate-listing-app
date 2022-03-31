@@ -16,14 +16,15 @@ const DeleteAgentTab = () => {
         agentEmail,
         password,
       };
-      await fetch("http://localhost:5013/user/agent/", {
+      const res = await fetch("http://localhost:5013/user/agents/", {
         method: "DELETE",
         mode: "cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
+      console.log(res.json());
       alert("Agent was successfully deleted");
-      clearEntries();
+      // clearEntries();
     } catch (error) {
       alert(error.message);
       clearEntries();
@@ -31,36 +32,35 @@ const DeleteAgentTab = () => {
   };
 
   return (
-      <div className="flex-container-agent">
-        <h1>Delete Agent</h1>
-        <div className="content">
-          <form onSubmit={onSubmitForm}>
-            <div className="form-group">
-            </div>
-            <div className="form-group">
-              <label>Email</label>
-              <input
-                  type="email"
-                  placeholder="e.g. dakotajohnson@gmail.com"
-                  className="form-control"
-                  value={agentEmail}
-                  onChange={(e) => setAgentEmail(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label>Password </label>
-              <input
-                  type="password"
-                  placeholder="e.g. *@#!"
-                  className="form-control"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <button className="btn btn-primary">Delete</button>
-          </form>
-        </div>
+    <div className="flex-container-agent">
+      <h1>Delete Agent</h1>
+      <div className="content">
+        <form onSubmit={onSubmitForm}>
+          <div className="form-group"></div>
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              placeholder="e.g. dakotajohnson@gmail.com"
+              className="form-control"
+              value={agentEmail}
+              onChange={(e) => setAgentEmail(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label>Password </label>
+            <input
+              type="password"
+              placeholder="e.g. *@#!"
+              className="form-control"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <button className="btn btn-primary">Delete</button>
+        </form>
       </div>
+    </div>
   );
 };
 

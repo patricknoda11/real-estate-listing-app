@@ -84,12 +84,14 @@ router.put("/", async (request, response) => {
 // TODO: delete operation
 router.delete("/", async (request, response) => {
   try {
-    const { email, password } = request.body;
-    await pool.query("DELETE FROM Agent WHERE email=? AND password=?;", [
-      email,
-      password,
-    ]);
-    response.status(200).send("The agent was successfully deleted");
+    const { agentEmail, password } = request.body;
+    const res = await pool.query(
+      "DELETE FROM Agent WHERE agentEmail=? AND password=?;",
+      [agentEmail, password]
+    );
+    response
+      .status(200)
+      .send("The agent with the given email has been removed");
   } catch (error) {
     response.status(400).send(error.message);
   }
