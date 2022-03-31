@@ -53,7 +53,7 @@ router.put("/", async (request, response) => {
     const {
       prvPhoneNumber,
       currPhoneNumber,
-      email,
+      agentEmail,
       password,
       name,
       birthday,
@@ -62,10 +62,10 @@ router.put("/", async (request, response) => {
       preferredInPersonMeetingLocation,
     } = request.body;
     await pool.query(
-      "Update Agent SET phoneNumber=?, email=?, password=?, name=?, birthday=?, yearsExperience=?, preferredMeetingDuration=?, preferredInPersonMeetingLocation=? Where phoneNumber=?",
+      "Update Agent SET phoneNumber=?, agentEmail=?, password=?, name=?, birthday=?, yearsExperience=?, preferredMeetingDuration=?, preferredInPersonMeetingLocation=? Where phoneNumber=?",
       [
         currPhoneNumber,
-        email,
+        agentEmail,
         password,
         name,
         birthday,
