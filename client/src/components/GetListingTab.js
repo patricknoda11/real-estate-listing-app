@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import {MenuItem, Select} from "@mui/material";
 
 const GetListingTab = () => {
   let [ownerName, setOwnerName] = useState("");
@@ -11,6 +12,10 @@ const GetListingTab = () => {
   let [numberOfBathrooms, setNumberOfBathrooms] = useState("");
   let [interiorSize, setInteriorSize] = useState("");
   let [landSize, setLandSize] = useState("");
+
+  const handleChange = (event) => {
+    setType(event.target.value);
+  };
 
   const clearEntries = () => {
     setOwnerName("");
@@ -111,19 +116,23 @@ const GetListingTab = () => {
             </div>
             <div className="form-group">
               <label>Type</label>
-              <input
-                  type="number"
-                  placeholder="e.g. Canada"
-                  className="form-control"
+              <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
                   value={type}
-                  onChange={(e) => setType(e.target.value)}
-              />
+                  label="Age"
+                  onChange={handleChange}
+              >
+                <MenuItem value={"single house"}>single house</MenuItem>
+                <MenuItem value={"apartment"}>apartment</MenuItem>
+                <MenuItem value={"town house"}>town house</MenuItem>
+              </Select>
             </div>
             <div className="form-group">
               <label>Number of Rooms</label>
               <input
                   type="number"
-                  placeholder="e.g. Canada"
+                  placeholder="e.g. 5"
                   className="form-control"
                   value={numberOfRooms}
                   onChange={(e) => setNumberOfRooms(e.target.value)}
@@ -133,7 +142,7 @@ const GetListingTab = () => {
               <label>Number of Bathrooms</label>
               <input
                   type="number"
-                  placeholder="e.g. Canada"
+                  placeholder="e.g. 2"
                   className="form-control"
                   value={numberOfBathrooms}
                   onChange={(e) => setNumberOfBathrooms(e.target.value)}
@@ -143,7 +152,7 @@ const GetListingTab = () => {
               <label>Interior Size</label>
               <input
                   type="number"
-                  placeholder="e.g. Canada"
+                  placeholder="e.g. 125"
                   className="form-control"
                   value={interiorSize}
                   onChange={(e) => setInteriorSize(e.target.value)}
@@ -153,7 +162,7 @@ const GetListingTab = () => {
               <label>Land Size</label>
               <input
                   type="number"
-                  placeholder="e.g. Canada"
+                  placeholder="e.g. 140"
                   className="form-control"
                   value={landSize}
                   onChange={(e) => setLandSize(e.target.value)}
