@@ -18,31 +18,33 @@ const GetAgentsTab = () => {
   return (
     <div className="flex-container-agent">
       <h1>Retrieve Agent Information</h1>
-      <form onSubmit={onSubmitForm}>
-        <button className="btn btn-success my-3">Get</button>
-      </form>
-      <ReactBootStrap.Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone #</th>
-            <th>Meeting Duration</th>
-            <th>Meeting Location</th>
-          </tr>
-        </thead>
-        <tbody>
-          {entries.map((entry) => (
+      <div className="content">
+        <form onSubmit={onSubmitForm}>
+          <button className="btn btn-success my-3">Get</button>
+        </form>
+        <ReactBootStrap.Table striped bordered hover>
+          <thead>
             <tr>
-              <td>{entry.name}</td>
-              <td>{entry.agentEmail}</td>
-              <td>{entry.phoneNumber}</td>
-              <td>{entry.preferredMeetingDuration}</td>
-              <td>{entry.preferredInPersonMeetingLocation}</td>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone #</th>
+              <th>Meeting Duration</th>
+              <th>Meeting Location</th>
             </tr>
-          ))}
-        </tbody>
-      </ReactBootStrap.Table>
+          </thead>
+          <tbody>
+            {entries.map((entry) => (
+              <tr>
+                <td>{entry.name}</td>
+                <td>{entry.agentEmail}</td>
+                <td>{entry.phoneNumber}</td>
+                <td>{entry.preferredMeetingDuration}</td>
+                <td>{entry.preferredInPersonMeetingLocation}</td>
+              </tr>
+            ))}
+          </tbody>
+        </ReactBootStrap.Table>
+      </div>
     </div>
   );
 };
