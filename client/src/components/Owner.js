@@ -2,9 +2,8 @@ import "./styles/Owner.scss";
 import React, { useState } from "react";
 
 const Owner = () => {
-  let [ownerPhoneNumber, setOwnerPhoneNumber] = useState(0);
+  const [ownerPhoneNumber, setOwnerPhoneNumber] = useState("");
   const [ownerName, setOwnerName] = useState("");
-  // const [userMsg, setuserMsg] = useState("");
 
   const clearEntries = () => {
     setOwnerPhoneNumber("");
@@ -14,20 +13,18 @@ const Owner = () => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      ownerPhoneNumber = Number(ownerPhoneNumber);
       const body = { ownerPhoneNumber, ownerName };
-      const response = await fetch("http://localhost:5013/user/owner", {
+      await fetch("http://localhost:5013/user/owner", {
         method: "POST",
         mode: "cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      const responseParsed = await response.json();
-      alert("Owner was successfully added");
-      clearEntries();
+      alert("Owner was added successfully");
+      // clearEntries();
     } catch (error) {
       alert(error.message);
-      clearEntries();
+      // clearEntries();
     }
   };
 

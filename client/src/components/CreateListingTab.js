@@ -43,7 +43,7 @@ const CreateListingTab = () => {
         interiorSize,
         landSize,
       };
-      await fetch("http://localhost:5013/listings/", {
+      await fetch("http://localhost:5013/listing/", {
         method: "POST",
         mode: "cors",
         headers: { "Content-Type": "application/json" },
@@ -66,7 +66,7 @@ const CreateListingTab = () => {
             <label>Owner Phone Number</label>
             <input
               type="number"
-              placeholder="e.g. 3"
+              placeholder="e.g. 6048305116"
               className="form-control"
               value={ownerPhoneNumber}
               onChange={(e) => setOwnerPhoneNumber(e.target.value)}
@@ -96,7 +96,7 @@ const CreateListingTab = () => {
             <label>Agent Email</label>
             <input
               type="email"
-              placeholder="e.g. 1000000"
+              placeholder="e.g. dakotajohnson@gmail.com"
               className="form-control"
               value={agentEmail}
               onChange={(e) => setAgentEmail(e.target.value)}

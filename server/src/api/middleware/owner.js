@@ -8,14 +8,13 @@ router.post("/", async (request, response) => {
   try {
     const sqlQuery =
       "INSERT INTO Owner (ownerPhoneNumber, ownerName) VALUES (?, ?);";
-    console.log(request.body);
     const { ownerPhoneNumber, ownerName } = request.body;
-    console.log(ownerName, ownerPhoneNumber);
     await pool.query(sqlQuery, [ownerPhoneNumber, ownerName]);
     response
       .status(200)
-      .send(`New Owner with phone number, ${ownerPhoneNumber} was added`);
+      .send(`New owner with phone number, ${ownerPhoneNumber} was added`);
   } catch (error) {
+    console.log("HE");
     response.status(400).send(error.message);
   }
 });

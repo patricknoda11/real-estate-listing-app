@@ -36,10 +36,10 @@ const Listings = () => {
       });
       const parsedResponse = await response.json();
       setEntries(parsedResponse);
-      //   clearEntries();
+      clearEntries();
     } catch (error) {
       alert(error.message);
-      //   clearEntries();
+      clearEntries();
     }
   };
 

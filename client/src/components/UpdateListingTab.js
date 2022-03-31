@@ -52,27 +52,27 @@ const UpdateListingTab = () => {
         interiorSize,
         landSize,
       };
-      await fetch("http://localhost:5013/listings/", {
+      await fetch("http://localhost:5013/listing/", {
         method: "PUT",
         mode: "cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
       alert("listing was successfully updated");
-      clearEntries();
+      // clearEntries();
     } catch (error) {
       alert(error.message);
-      clearEntries();
+      // clearEntries();
     }
   };
 
   return (
-    <div className="flex-container-agent">
-      <h1>Update Listings</h1>
+    <div className="flex-container-listings">
+      <h1>Update Listing</h1>
       <div className="content">
         <form onSubmit={onSubmitForm}>
           <div className="form-group">
-            <label>Previous Owner Phone Number</label>
+            <label>Current Owner Phone Number</label>
             <input
               type="number"
               placeholder="e.g. 6048305116"
@@ -83,7 +83,7 @@ const UpdateListingTab = () => {
           </div>
           <div className="form-group">
             <label>
-              Current Owner Phone Number (Enter same as above if not changed)
+              New Owner Phone Number (Enter same as above if not changed)
             </label>
             <input
               type="number"
@@ -94,7 +94,7 @@ const UpdateListingTab = () => {
             />
           </div>
           <div className="form-group">
-            <label>Previous Listing Address</label>
+            <label>Current Listing Address</label>
             <input
               type="text"
               placeholder="e.g. 12345 Alma st"
@@ -105,7 +105,7 @@ const UpdateListingTab = () => {
           </div>
           <div className="form-group">
             <label>
-              Current Listing Address (Enter same as above if not changed)
+              New Listing Address (Enter same as above if not changed)
             </label>
             <input
               type="text"
@@ -118,8 +118,8 @@ const UpdateListingTab = () => {
           <div className="form-group">
             <label>Owner Name</label>
             <input
-              type="number"
-              placeholder="e.g. 6048302113"
+              type="text"
+              placeholder="e.g. Dakota Johnson"
               className="form-control"
               value={ownerName}
               onChange={(e) => setOwnerName(e.target.value)}
@@ -146,7 +146,7 @@ const UpdateListingTab = () => {
             />
           </div>
           <div className="form-group">
-            <label>Previous Location</label>
+            <label>Current Location</label>
             <input
               type="text"
               placeholder="e.g. Vancouver, BC"
@@ -156,7 +156,7 @@ const UpdateListingTab = () => {
             />
           </div>
           <div className="form-group">
-            <label>Current Location</label>
+            <label>New Location (Enter same as above if not changed)</label>
             <input
               type="text"
               placeholder="e.g. Vancouver, BC"
@@ -215,7 +215,7 @@ const UpdateListingTab = () => {
               onChange={(e) => setLandSize(e.target.value)}
             />
           </div>
-          <button className="btn btn-primary">search</button>
+          <button className="btn btn-primary">Update</button>
         </form>
       </div>
     </div>

@@ -49,13 +49,13 @@ const Listings = () => {
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs value={tab} onChange={handleChange}>
             <Tab label="Add Listing" {...a11yProps(0)} />
-            <Tab label="Update Listing" {...a11yProps(2)} />
+            <Tab label="Update Listing" {...a11yProps(1)} />
           </Tabs>
         </Box>
         <TabPanel value={tab} index={0}>
           <CreateListingTab />
         </TabPanel>
-        <TabPanel value={tab} index={2}>
+        <TabPanel value={tab} index={1}>
           <UpdateListingTab />
         </TabPanel>
       </Box>
