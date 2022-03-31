@@ -6,6 +6,7 @@ const env = require("dotenv");
 const homeRoute = require("./api/middleware/home");
 const agentRoute = require("./api/middleware/agent");
 const agentAnalyticsRoute = require("./api/middleware/agent-analytics");
+const learnMoreRoute = require("./api/middleware/learn-more");
 const buyerRoute = require("./api/middleware/buyer");
 const appointmentRoute = require("./api/middleware/appt");
 const listingsRoute = require("./api/middleware/listings");
@@ -27,6 +28,7 @@ app.use("/user/owner", ownerRoute);
 app.use("/user/agents", agentRoute);
 app.use("/user/agents/analytics", agentAnalyticsRoute);
 app.use("/listings", listingsRoute);
+app.use("/listings", learnMoreRoute);
 app.use("/listing", listingRoute);
 app.use("/listings/analytics", listingsAnalyticsRoute);
 

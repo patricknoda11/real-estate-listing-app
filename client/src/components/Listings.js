@@ -1,14 +1,20 @@
 import "./styles/Listings.scss";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import * as ReactBootStrap from "react-bootstrap";
 
 const Listings = () => {
+  const link = useRef("/listings/");
   const [numBathrooms, setNumBathrooms] = useState("");
   const [interiorSize, setInteriorSize] = useState("");
   const [landSize, setLandSize] = useState("");
   const [startingPrice, setStartingPrice] = useState("");
   const [maximumPrice, setMaximumPrice] = useState("");
   const [entries, setEntries] = useState([]);
+
+  const onClickHandler = (e) => {
+    e.preventDefault();
+  };
 
   const clearEntries = () => {
     setNumBathrooms("");
@@ -36,10 +42,10 @@ const Listings = () => {
       });
       const parsedResponse = await response.json();
       setEntries(parsedResponse);
-      clearEntries();
+      //   clearEntries();
     } catch (error) {
       alert(error.message);
-      clearEntries();
+      //   clearEntries();
     }
   };
 
@@ -111,6 +117,7 @@ const Listings = () => {
               <th># Bathrooms</th>
               <th>Interior size (sq-ft)</th>
               <th>Land size (sq-ft)</th>
+              <th>Additional Details</th>
             </tr>
           </thead>
           <tbody>
@@ -124,6 +131,11 @@ const Listings = () => {
                 <td>{entry.numberOfBathrooms}</td>
                 <td>{entry.interiorSize}</td>
                 <td>{entry.landSize}</td>
+                <td>
+                  <Link to={`/listings/${entry.listingAddress}`}>
+                    Learn More
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>
