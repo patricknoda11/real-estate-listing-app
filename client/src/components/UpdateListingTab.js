@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { MenuItem, Select } from "@mui/material";
 
 const UpdateListingTab = () => {
   const [prvOwnerPhoneNumber, setPrvOwnerPhoneNumber] = useState("");
@@ -15,6 +16,10 @@ const UpdateListingTab = () => {
   const [numberOfBathrooms, setNumberOfBathrooms] = useState("");
   const [interiorSize, setInteriorSize] = useState("");
   const [landSize, setLandSize] = useState("");
+
+  const handleChange = (event) => {
+    setType(event.target.value);
+  };
 
   const clearEntries = () => {
     setPrvOwnerPhoneNumber("");

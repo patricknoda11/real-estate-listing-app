@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { MenuItem, Select } from "@mui/material";
 
 const CreateListingTab = () => {
   const [numBathrooms, setNumBathrooms] = useState("");
@@ -6,6 +7,10 @@ const CreateListingTab = () => {
   const [landSize, setLandSize] = useState("");
   const [startingPrice, setStartingPrice] = useState("");
   const [maximumPrice, setMaximumPrice] = useState("");
+
+  const handleChange = (event) => {
+    setType(event.target.value);
+  };
 
   const clearEntries = () => {
     setNumBathrooms("");

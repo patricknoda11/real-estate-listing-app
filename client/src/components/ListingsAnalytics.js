@@ -9,7 +9,6 @@ const ListingsAnalytics = () => {
     try {
       const response = await fetch("http://localhost:5013/listings/analytics");
       const parsedResponse = await response.json();
-      console.log(parsedResponse);
       setData(parsedResponse);
     } catch (error) {
       alert(error.message);

@@ -25,12 +25,12 @@ app.use(express.json());
 // app.use("/user/buyer", buyerRoute);
 // app.use("/appt", appointmentRoute);
 app.use("/user/owner", ownerRoute);
+app.use("/listings/analytics", listingsAnalyticsRoute);
 app.use("/user/agents", agentRoute);
 app.use("/user/agents/analytics", agentAnalyticsRoute);
 app.use("/listings", listingsRoute);
 app.use("/listings", learnMoreRoute);
 app.use("/listing", listingRoute);
-app.use("/listings/analytics", listingsAnalyticsRoute);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
