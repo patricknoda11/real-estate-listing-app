@@ -1,17 +1,17 @@
 import { useState } from "react";
 
 const CreateListingTab = () => {
-  let [ownerPhoneNumber, setOwnerPhoneNumber] = useState("");
+  const [ownerPhoneNumber, setOwnerPhoneNumber] = useState("");
   const [ownerName, setOwnerName] = useState("");
   const [listingAddress, setListingAddress] = useState("");
   const [agentEmail, setAgentEmail] = useState("");
-  let [price, setPrice] = useState("");
+  const [price, setPrice] = useState("");
   const [location, setLocation] = useState("");
   const [type, setType] = useState("");
-  let [numberOfRooms, setNumberOfRooms] = useState("");
-  let [numberOfBathrooms, setNumberOfBathrooms] = useState("");
-  let [interiorSize, setInteriorSize] = useState("");
-  let [landSize, setLandSize] = useState("");
+  const [numberOfRooms, setNumberOfRooms] = useState("");
+  const [numberOfBathrooms, setNumberOfBathrooms] = useState("");
+  const [interiorSize, setInteriorSize] = useState("");
+  const [landSize, setLandSize] = useState("");
 
   const clearEntries = () => {
     setOwnerPhoneNumber("");

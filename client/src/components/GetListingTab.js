@@ -1,53 +1,37 @@
 import { useState } from "react";
 
-const GetListingTab = () => {
-  let [ownerName, setOwnerName] = useState("");
-  let [listingAddress, setListingAddress] = useState("");
-  let [agentEmail, setAgentEmail] = useState("");
-  let [price, setPrice] = useState("");
-  let [location, setLocation] = useState("");
-  let [type, setType] = useState("");
-  let [numberOfRooms, setNumberOfRooms] = useState("");
-  let [numberOfBathrooms, setNumberOfBathrooms] = useState("");
-  let [interiorSize, setInteriorSize] = useState("");
-  let [landSize, setLandSize] = useState("");
+const CreateListingTab = () => {
+  const [numBathrooms, setNumBathrooms] = useState("");
+  const [interiorSize, setInteriorSize] = useState("");
+  const [landSize, setLandSize] = useState("");
+  const [startingPrice, setStartingPrice] = useState("");
+  const [maximumPrice, setMaximumPrice] = useState("");
 
   const clearEntries = () => {
-    setOwnerName("");
-    setLocation("");
-    setAgentEmail("");
-    setPrice("");
-    setLocation("");
-    setType("");
-    setNumberOfRooms("");
-    setNumberOfBathrooms("");
+    setNumBathrooms("");
     setInteriorSize("");
     setLandSize("");
+    setStartingPrice("");
+    setMaximumPrice("");
   };
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
       const body = {
-       ownerName,
-       listingAddress,
-       agentEmail,
-       price,
-       location,
-       type,
-       numberOfRooms,
-       numberOfBathrooms,
-       interiorSize,
-       landSize,
+        numBathrooms,
+        interiorSize,
+        landSize,
+        startingPrice,
+        maximumPrice,
       };
-      await fetch("http://localhost:5013/user/listing/", {
-        method: "GET",
-        mode: "cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      alert("listing was successfully searched");
-      clearEntries();
+      // await fetch("http://localhost:5013/listings/", { // TODO: fix this
+      //   method: "POST",
+      //   mode: "cors",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(body),
+      // });
+      // clearEntries();
     } catch (error) {
       alert(error.message);
       clearEntries();
@@ -55,115 +39,65 @@ const GetListingTab = () => {
   };
 
   return (
-      <div className="flex-container-agent">
-        <h1>Search Listings</h1>
-        <div className="content">
-          <form onSubmit={onSubmitForm}>
-            <div className="form-group">
-              <label>Owner Name</label>
-              <input
-                  type="text"
-                  placeholder="e.g. John Harold"
-                  className="form-control"
-                  value={ownerName}
-                  onChange={(e) => setOwnerName(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label> Listing Address </label>
-              <input
-                  type="text"
-                  placeholder="e.g. 7788 Lucas Rd, Richmond"
-                  className="form-control"
-                  value={listingAddress}
-                  onChange={(e) => setListingAddress(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label>Agent Email </label>
-              <input
-                  type="email"
-                  placeholder="e.g. johnsnow@gail.com"
-                  className="form-control"
-                  value={agentEmail}
-                  onChange={(e) => setAgentEmail(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label> Price</label>
-              <input
-                  type="number"
-                  placeholder="e.g. 1000000"
-                  className="form-control"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label>Location</label>
-              <input
-                  type="number"
-                  placeholder="e.g. Canada"
-                  className="form-control"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label>Type</label>
-              <input
-                  type="number"
-                  placeholder="e.g. Canada"
-                  className="form-control"
-                  value={type}
-                  onChange={(e) => setType(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label>Number of Rooms</label>
-              <input
-                  type="number"
-                  placeholder="e.g. Canada"
-                  className="form-control"
-                  value={numberOfRooms}
-                  onChange={(e) => setNumberOfRooms(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label>Number of Bathrooms</label>
-              <input
-                  type="number"
-                  placeholder="e.g. Canada"
-                  className="form-control"
-                  value={numberOfBathrooms}
-                  onChange={(e) => setNumberOfBathrooms(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label>Interior Size</label>
-              <input
-                  type="number"
-                  placeholder="e.g. Canada"
-                  className="form-control"
-                  value={interiorSize}
-                  onChange={(e) => setInteriorSize(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label>Land Size</label>
-              <input
-                  type="number"
-                  placeholder="e.g. Canada"
-                  className="form-control"
-                  value={landSize}
-                  onChange={(e) => setLandSize(e.target.value)}
-              />
-            </div>
-            <button className="btn btn-primary">search</button>
-          </form>
-        </div>
+    <div className="flex-container-agent">
+      <h1>Search for Listings</h1>
+      <div className="content">
+        <form onSubmit={onSubmitForm}>
+          <div className="form-group">
+            <label>Number of Bathrooms (minnimum)</label>
+            <input
+              type="number"
+              placeholder="e.g. 3"
+              className="form-control"
+              value={numBathrooms}
+              onChange={(e) => setNumBathrooms(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label>Interior Size (minnimum sq-ft)</label>
+            <input
+              type="number"
+              placeholder="e.g. 5000"
+              className="form-control"
+              value={interiorSize}
+              onChange={(e) => setInteriorSize(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label>Land Size (minnimum sq-ft)</label>
+            <input
+              type="number"
+              placeholder="e.g. 10000"
+              className="form-control"
+              value={landSize}
+              onChange={(e) => setLandSize(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label>Starting Price</label>
+            <input
+              type="number"
+              placeholder="e.g. 200000"
+              className="form-control"
+              value={startingPrice}
+              onChange={(e) => setStartingPrice(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label>Maximum Price</label>
+            <input
+              type="number"
+              placeholder="e.g. 1000000"
+              className="form-control"
+              value={maximumPrice}
+              onChange={(e) => setMaximumPrice(e.target.value)}
+            />
+          </div>
+          <button className="btn btn-primary">Create</button>
+        </form>
       </div>
+    </div>
   );
 };
 
-export default GetListingTab;
+export default CreateListingTab;
