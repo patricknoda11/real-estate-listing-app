@@ -62,6 +62,7 @@ const Listings = () => {
               className="form-control"
               value={numBathrooms}
               onChange={(e) => setNumBathrooms(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -72,6 +73,7 @@ const Listings = () => {
               className="form-control"
               value={interiorSize}
               onChange={(e) => setInteriorSize(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -82,6 +84,7 @@ const Listings = () => {
               className="form-control"
               value={landSize}
               onChange={(e) => setLandSize(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -92,6 +95,7 @@ const Listings = () => {
               className="form-control"
               value={startingPrice}
               onChange={(e) => setStartingPrice(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -102,6 +106,7 @@ const Listings = () => {
               className="form-control"
               value={maximumPrice}
               onChange={(e) => setMaximumPrice(e.target.value)}
+              required
             />
           </div>
           <button className="btn btn-primary">Search</button>

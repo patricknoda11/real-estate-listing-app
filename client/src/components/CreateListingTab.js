@@ -70,6 +70,7 @@ const CreateListingTab = () => {
               className="form-control"
               value={ownerPhoneNumber}
               onChange={(e) => setOwnerPhoneNumber(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -80,6 +81,7 @@ const CreateListingTab = () => {
               className="form-control"
               value={ownerName}
               onChange={(e) => setOwnerName(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -90,6 +92,7 @@ const CreateListingTab = () => {
               className="form-control"
               value={listingAddress}
               onChange={(e) => setListingAddress(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -100,6 +103,7 @@ const CreateListingTab = () => {
               className="form-control"
               value={agentEmail}
               onChange={(e) => setAgentEmail(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -110,6 +114,7 @@ const CreateListingTab = () => {
               className="form-control"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -120,6 +125,7 @@ const CreateListingTab = () => {
               className="form-control"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -130,6 +136,7 @@ const CreateListingTab = () => {
               className="form-control"
               value={type}
               onChange={(e) => setType(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -140,6 +147,7 @@ const CreateListingTab = () => {
               className="form-control"
               value={numberOfRooms}
               onChange={(e) => setNumberOfRooms(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -150,6 +158,7 @@ const CreateListingTab = () => {
               className="form-control"
               value={numberOfBathrooms}
               onChange={(e) => setNumberOfBathrooms(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -160,6 +169,7 @@ const CreateListingTab = () => {
               className="form-control"
               value={interiorSize}
               onChange={(e) => setInteriorSize(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -170,6 +180,7 @@ const CreateListingTab = () => {
               className="form-control"
               value={landSize}
               onChange={(e) => setLandSize(e.target.value)}
+              required
             />
           </div>
           <button className="btn btn-primary">Create</button>

@@ -18,7 +18,7 @@ env.config();
 
 const PORT = process.env.SERVER_PORT || 5012;
 
-// add middleware/routes
+// add middleware/routess
 app.use(cors());
 app.use(express.json());
 // app.use("/", homeRoute);

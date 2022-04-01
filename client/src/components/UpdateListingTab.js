@@ -84,6 +84,7 @@ const UpdateListingTab = () => {
               className="form-control"
               value={prvOwnerPhoneNumber}
               onChange={(e) => setPrvOwnerPhoneNumber(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -96,6 +97,7 @@ const UpdateListingTab = () => {
               className="form-control"
               value={currOwnerPhoneNumber}
               onChange={(e) => setCurrOwnerPhoneNumber(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -106,6 +108,7 @@ const UpdateListingTab = () => {
               className="form-control"
               value={prvListingAddress}
               onChange={(e) => setPrvListingAddress(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -118,6 +121,7 @@ const UpdateListingTab = () => {
               className="form-control"
               value={currListingAddress}
               onChange={(e) => setCurrListingAddress(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -128,6 +132,7 @@ const UpdateListingTab = () => {
               className="form-control"
               value={ownerName}
               onChange={(e) => setOwnerName(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -138,6 +143,7 @@ const UpdateListingTab = () => {
               className="form-control"
               value={agentEmail}
               onChange={(e) => setAgentEmail(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -148,6 +154,7 @@ const UpdateListingTab = () => {
               className="form-control"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -158,6 +165,7 @@ const UpdateListingTab = () => {
               className="form-control"
               value={prvLocation}
               onChange={(e) => setPrvLocation(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -168,6 +176,7 @@ const UpdateListingTab = () => {
               className="form-control"
               value={currLocation}
               onChange={(e) => setCurrLocation(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -178,6 +187,7 @@ const UpdateListingTab = () => {
               className="form-control"
               value={type}
               onChange={(e) => setType(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -188,6 +198,7 @@ const UpdateListingTab = () => {
               className="form-control"
               value={numberOfRooms}
               onChange={(e) => setNumberOfRooms(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -198,6 +209,7 @@ const UpdateListingTab = () => {
               className="form-control"
               value={numberOfBathrooms}
               onChange={(e) => setNumberOfBathrooms(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -208,6 +220,7 @@ const UpdateListingTab = () => {
               className="form-control"
               value={interiorSize}
               onChange={(e) => setInteriorSize(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -218,6 +231,7 @@ const UpdateListingTab = () => {
               className="form-control"
               value={landSize}
               onChange={(e) => setLandSize(e.target.value)}
+              required
             />
           </div>
           <button className="btn btn-primary">Update</button>

@@ -68,6 +68,7 @@ const RegisterAgentTab = () => {
               className="form-control"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -78,6 +79,7 @@ const RegisterAgentTab = () => {
               className="form-control"
               value={agentEmail}
               onChange={(e) => setAgentEmail(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -88,6 +90,7 @@ const RegisterAgentTab = () => {
               className="form-control"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -98,6 +101,7 @@ const RegisterAgentTab = () => {
               className="form-control"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -108,6 +112,7 @@ const RegisterAgentTab = () => {
               className="form-control"
               value={birthday}
               onChange={(e) => setBirthday(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -118,6 +123,7 @@ const RegisterAgentTab = () => {
               className="form-control"
               value={yearsExperience}
               onChange={(e) => setYearExperience(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -128,6 +134,7 @@ const RegisterAgentTab = () => {
               className="form-control"
               value={preferredMeetingDuration}
               onChange={(e) => setPreferredMeetingDuration(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -140,6 +147,7 @@ const RegisterAgentTab = () => {
               onChange={(e) =>
                 setPreferredInPersonMeetingLocation(e.target.value)
               }
+              required
             />
           </div>
           <button className="btn btn-primary">Register</button>

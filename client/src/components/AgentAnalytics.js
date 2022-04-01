@@ -40,6 +40,7 @@ const AgentAnalytics = () => {
             placeholder="e.g. 2"
             value={count}
             onChange={(e) => setCount(e.target.value)}
+            required
           />
           <button className="btn btn-primary my-3">Get</button>
         </form>

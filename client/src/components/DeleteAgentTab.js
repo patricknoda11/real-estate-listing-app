@@ -45,6 +45,7 @@ const DeleteAgentTab = () => {
               className="form-control"
               value={agentEmail}
               onChange={(e) => setAgentEmail(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -55,6 +56,7 @@ const DeleteAgentTab = () => {
               className="form-control"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
           <button className="btn btn-primary">Delete</button>

@@ -41,6 +41,7 @@ const Owner = () => {
               placeholder="e.g. 6048301191"
               value={ownerPhoneNumber}
               onChange={(e) => setOwnerPhoneNumber(e.target.value)}
+              required
             ></input>
           </div>
           <div className="form-group">
@@ -51,6 +52,7 @@ const Owner = () => {
               placeholder="e.g. Dakota Johnson"
               value={ownerName}
               onChange={(e) => setOwnerName(e.target.value)}
+              required
             ></input>
           </div>
           <button className="btn btn-primary">Register</button>
