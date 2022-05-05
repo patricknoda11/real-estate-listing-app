@@ -1,18 +1,16 @@
-"use strict";
-
-const express = require("express");
-const pool = require("../utils/db.js");
+const express = require('express');
+const pool = require('../utils/db.js');
 const router = express.Router();
 
-router.post("/", async (request, response) => {
+router.post('/', async (request, response) => {
   const connection = await pool.getConnection();
   try {
     const ownerQuery =
-      "INSERT INTO Owner (ownerPhoneNumber, ownerName) VALUES (?, ?) ON DUPLICATE KEY UPDATE ownerPhoneNumber=ownerPhoneNumber, ownerName=ownerName;";
+      'INSERT INTO Owner (ownerPhoneNumber, ownerName) VALUES (?, ?) ON DUPLICATE KEY UPDATE ownerPhoneNumber=ownerPhoneNumber, ownerName=ownerName;';
     const listingOwnsHasQuery =
-      "INSERT INTO ListingOwnsHas (listingAddress, ownerPhoneNumber, agentEmail, price) VALUES (?, ?, ?, ?);";
+      'INSERT INTO ListingOwnsHas (listingAddress, ownerPhoneNumber, agentEmail, price) VALUES (?, ?, ?, ?);';
     const PropertyHasQuery =
-      "INSERT INTO PropertyHas(listingAddress, location, type, numberOfRooms, numberOfBathrooms, interiorSize, landSize) VALUES (?, ?, ?, ?, ?, ?, ?);";
+      'INSERT INTO PropertyHas(listingAddress, location, type, numberOfRooms, numberOfBathrooms, interiorSize, landSize) VALUES (?, ?, ?, ?, ?, ?, ?);';
     const {
       ownerPhoneNumber,
       ownerName,
@@ -27,7 +25,7 @@ router.post("/", async (request, response) => {
       landSize,
     } = request.body;
 
-    await connection.query("START TRANSACTION");
+    await connection.query('START TRANSACTION');
     await connection.query(ownerQuery, [ownerPhoneNumber, ownerName]);
     await connection.query(listingOwnsHasQuery, [
       listingAddress,
@@ -44,26 +42,26 @@ router.post("/", async (request, response) => {
       interiorSize,
       landSize,
     ]);
-    await connection.query("COMMIT");
+    await connection.query('COMMIT');
     connection.release();
-    response.status(200).send("listing was added");
+    response.status(200).send('listing was added');
   } catch (error) {
-    await connection.query("ROLLBACK");
+    await connection.query('ROLLBACK');
     connection.release();
     response.status(400).send(error.message);
   }
 });
 
 // TODO: update operation
-router.put("/", async (request, response) => {
+router.put('/', async (request, response) => {
   const connection = await pool.getConnection();
   try {
     const ownerQuery =
-      "UPDATE Owner SET ownerName=?, ownerPhoneNumber=? WHERE ownerPhoneNumber=?";
+      'UPDATE Owner SET ownerName=?, ownerPhoneNumber=? WHERE ownerPhoneNumber=?';
     const listingOwnsHasQuery =
-      "UPDATE ListingOwnsHas SET listingAddress=?, agentEmail=?, price=? WHERE listingAddress=?;";
+      'UPDATE ListingOwnsHas SET listingAddress=?, agentEmail=?, price=? WHERE listingAddress=?;';
     const propertyHasQuery =
-      "UPDATE PropertyHas SET location=?, type=?, numberOfRooms=?, numberOfBathrooms=?, interiorSize=?, landSize=? WHERE listingAddress=? AND location=?;";
+      'UPDATE PropertyHas SET location=?, type=?, numberOfRooms=?, numberOfBathrooms=?, interiorSize=?, landSize=? WHERE listingAddress=? AND location=?;';
     const {
       prvOwnerPhoneNumber,
       currOwnerPhoneNumber,
@@ -80,7 +78,7 @@ router.put("/", async (request, response) => {
       interiorSize,
       landSize,
     } = request.body;
-    await connection.query("START TRANSACTION");
+    await connection.query('START TRANSACTION');
     await connection.query(ownerQuery, [
       ownerName,
       currOwnerPhoneNumber,
@@ -102,22 +100,22 @@ router.put("/", async (request, response) => {
       currListingAddress,
       prvLocation,
     ]);
-    await connection.query("COMMIT");
+    await connection.query('COMMIT');
     connection.release();
     response.status(200).send(`listing information was updated`);
   } catch (error) {
-    await connection.query("ROLLBACK");
+    await connection.query('ROLLBACK');
     connection.release();
     response.status(400).send(error.message);
   }
 });
 
-router.delete("/", async (request, response) => {
+router.delete('/', async (request, response) => {
   try {
-    const sqlQuery = "DELETE FROM ListingOwnsHas WHERE listingAddress=?;";
+    const sqlQuery = 'DELETE FROM ListingOwnsHas WHERE listingAddress=?;';
     const { listingAddress } = request.body;
     await pool.query(sqlQuery, [listingAddress]);
-    response.status(200).send("The listing was successfully deleted");
+    response.status(200).send('The listing was successfully deleted');
   } catch (error) {
     response.status(400).send(error.message);
   }

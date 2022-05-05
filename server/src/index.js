@@ -1,10 +1,13 @@
-const express = require("express");
-const cors = require("cors");
-require("dotenv").config();
-const homeRoute = require("./api/routes/home");
-const listingsRoute = require("./api/routes/listings");
-const agentLoginRoute = require("./api/routes/public/agent-authentication");
-const agentRegisterationRoute = require("./api/routes/public/agent-registeration");
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
+const authorizationMiddleware = require('./api/middleware/authorization');
+const listingsRoute = require('./api/routes/public/listings');
+const agentAuthenticationRoute = require('./api/routes/public/agent-authentication');
+const buyerAuthenticationRoute = require('./api/routes/public/buyer-authentication');
+const agentListingsRoute = require('./api/routes/private/agent-listings');
+const agentAppointmentsRoute = require('./api/routes/private/agent-appointments');
+const buyerAppointmentsRoute = require('./api/routes/private/buyer-appointments');
 
 const PORT = process.env.SERVER_PORT || 5012;
 const app = express();
@@ -14,26 +17,17 @@ app.use(cors());
 app.use(express.json());
 
 // ROUTES //
-// public routes:
-app.use("/", homeRoute);
-app.use("/listings", listingsRoute);
-app.use("/agent", agentLoginRoute);
-// private routes:
-app.use("/");
-// register and login routes:
-// app.use("/auth", require("./api/routes/jwt-auth"));
-// general routes:
-// app.use("/", homeRoute);
-// app.use("/user/buyer", buyerRoute);
-// app.use("/appt", appointmentRoute);
-// app.use("/user/owner", ownerRoute);
-// app.use("/listings/analytics", listingsAnalyticsRoute);
-// app.use("/user/agents/analytics", agentAnalyticsRoute);
-// app.use("/user/agents", agentRoute);
-// app.use("/listings", listingsRoute);
-// app.use("/listings", learnMoreRoute);
-// app.use("/listing", listingRoute);
+// Public routes:
+app.use('/listings', listingsRoute);
+app.use('/agent', agentAuthenticationRoute);
+app.use('/buyer', buyerAuthenticationRoute);
 
+// Private routes:
+app.use('/agent/listings', authorizationMiddleware, agentListingsRoute);
+app.use('/agent/appointments', authorizationMiddleware, agentAppointmentsRoute);
+app.use('/buyer/appointments', authorizationMiddleware, buyerAppointmentsRoute);
+
+// Listen:
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

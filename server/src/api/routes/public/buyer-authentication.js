@@ -1,19 +1,19 @@
-const express = require("express");
-const bcrypt = require("bcrypt");
-const pool = require("../../utils/db");
-require("dotenv").config();
-const jwtTokenGenerator = require("../../utils/token-generator");
-const validRegisterationInfo = require("../../middleware/validate-registeration-info");
+const express = require('express');
+const bcrypt = require('bcrypt');
+const pool = require('../../utils/db');
+require('dotenv').config();
+const jwtTokenGenerator = require('../../utils/token-generator');
+const validRegisterationInfo = require('../../middleware/validate-registeration-info');
 const router = express.Router();
 
 /**
  * /buyer/login route
  */
-router.post("/login", validRegisterationInfo, async (req, res) => {
+router.post('/login', validRegisterationInfo, async (req, res) => {
   const UNABLE_TO_LOGIN_CODE = 401;
   const BUYER_DOESNT_EXIST_MESSAGE = `No buyer account is associated with given email`;
   const INVALID_INPUT_MESSAGE = `Password or email is invalid`;
-  const FIND_BUYER_QUERY = `SELECT * FROM BUYER WHERE buyerEmail=$1`;
+  const FIND_BUYER_QUERY = `SELECT * FROM BUYER WHERE buyerEmail=?`;
 
   const { email, password } = req.body;
 
@@ -52,14 +52,14 @@ router.post("/login", validRegisterationInfo, async (req, res) => {
 /**
  * /buyer/registeration route
  */
-router.post("/registeration", validRegisterationInfo, async (req, res) => {
+router.post('/registeration', validRegisterationInfo, async (req, res) => {
   const BUYER_ALREADY_EXISTS_CODE = 401;
   const UNABLE_TO_REGISTER_CODE = 500;
   const BUYER_ALREADY_EXISTS_MESSAGE = `Buyer with the given email already exists`;
   const UNABLE_TO_REGISTER_MESSAGE = `Unable to register new buyer`;
-  const FIND_BUYER_QUERY = `SELECT * FROM Buyer WHERE buyerEmail=$1`;
+  const FIND_BUYER_QUERY = `SELECT * FROM Buyer WHERE buyerEmail=?`;
   const CREATE_BUYER_QUERY = `INSERT INTO BUYER (buyerId, buyerPhoneNumber, buyerEmail,
-     buyerPassword, buyerName, buyerBirthday) VALUES (UUID_TO_BIN(UUID()), $1, $2, $3, $4, $5) RETURNING buyerId`;
+     buyerPassword, buyerName, buyerBirthday) VALUES (UUID_TO_BIN(UUID()), ?, ?, ?, ?, ?) RETURNING buyerId`;
 
   const { name, email, phoneNumber, password, birthday } = req.body;
 

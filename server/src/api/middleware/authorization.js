@@ -16,7 +16,7 @@ const authorization = (req, res, next) => {
       res.status(403).send(UNAUTHORIZED_MESSAGE);
     }
 
-    const payload = await jwt.verify(jwtToken, process.env.JWT_SECRET)
+    const payload = jwt.verify(jwtToken, process.env.JWT_SECRET);
 
     res.user = payload.user;
     next();

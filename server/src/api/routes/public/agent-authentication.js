@@ -1,19 +1,19 @@
-const express = require("express");
-const bcrypt = require("bcrypt");
-const pool = require("../../utils/db");
-require("dotenv").config();
-const jwtTokenGenerator = require("../../utils/token-generator");
-const validRegisterationInfo = require("../../middleware/validate-registeration-info");
+const express = require('express');
+const bcrypt = require('bcrypt');
+const pool = require('../../utils/db');
+require('dotenv').config();
+const jwtTokenGenerator = require('../../utils/token-generator');
+const validRegisterationInfo = require('../../middleware/validate-registeration-info');
 const router = express.Router();
 
 /**
  * /agent/login route
  */
-router.post("/login", validRegisterationInfo, async (req, res) => {
+router.post('/login', validRegisterationInfo, async (req, res) => {
   const UNABLE_TO_LOGIN_CODE = 401;
   const AGENT_DOESNT_EXIST_MESSAGE = `No agent account is associated with given email`;
   const INVALID_INPUT_MESSAGE = `Password or email is invalid`;
-  const FIND_AGENT_QUERY = `SELECT * FROM AGENT WHERE agentEmail=$1`;
+  const FIND_AGENT_QUERY = `SELECT * FROM AGENT WHERE agentEmail=?`;
 
   const { email, password } = req.body;
 
@@ -52,19 +52,18 @@ router.post("/login", validRegisterationInfo, async (req, res) => {
 /**
  * /agent/registeration route
  */
-router.post("/registeration", validRegisterationInfo, async (req, res) => {
+router.post('/registeration', validRegisterationInfo, async (req, res) => {
   const AGENT_ALREADY_EXISTS_CODE = 401;
   const UNABLE_TO_REGISTER_CODE = 500;
   const AGENT_ALREADY_EXISTS_MESSAGE = `Agent with the given email already exists`;
   const UNABLE_TO_REGISTER_MESSAGE = `Unable to register new agent`;
-  const FIND_AGENT_QUERY = `SELECT * FROM AGENT WHERE agentEmail=$1`;
-  const CREATE_AGENT_QUERY = `INSERT INTO AGENT (agentId, agentPhoneNumber, agentEmail,
-     agentPassword, agentName, agentBirthday) VALUES (UUID_TO_BIN(UUID()), $1, $2, $3, $4, $5) RETURNING agentId`;
+  const FIND_AGENT_QUERY = `SELECT * FROM AGENT WHERE agentEmail=?`;
+  const CREATE_AGENT_QUERY = `INSERT INTO AGENT (agentId, agentPhoneNumber, agentEmail,) RETURNING agentId`;
 
   const { name, email, phoneNumber, password, birthday } = req.body;
 
   try {
-    // Find agents that have the inputted email:
+    // Find agents that have theinputted email:
     const agent = await pool.query(FIND_AGENT_QUERY, [email]);
 
     // If there exist such agent, reject registeration:
