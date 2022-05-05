@@ -8,7 +8,6 @@ CREATE TABLE Buyer (
 	buyerName VARCHAR(80) NOT NULL,
 	buyerBirthday DATE,
     PRIMARY KEY(buyerId),
-    UNIQUE(buyerPhoneNumber),
     UNIQUE(buyerEmail)
 ); 
 
@@ -19,9 +18,7 @@ CREATE TABLE Agent (
     agentPassword VARCHAR(80) NOT NULL,
 	agentName VARCHAR(80) NOT NULL,
 	agentBirthday DATE,
-    agentYearBegan YEAR,
     PRIMARY KEY(agentId),
-    UNIQUE(agentPhoneNumber),
     UNIQUE(agentEmail)
 );
 

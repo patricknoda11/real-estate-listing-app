@@ -6,7 +6,7 @@ require("dotenv").config();
  * @param {string} userId - in the form of a UUID, VARCHAR(36)
  * @returns {string} the JWT token for the user
  */
-const jwtGenerator = (userId) => {
+const jwtTokenGenerator = (userId) => {
   const EXPIRATION_TIME = 3600;
   const payload = {
     user: {
@@ -19,4 +19,4 @@ const jwtGenerator = (userId) => {
   });
 };
 
-module.exports = jwtGenerator;
+module.exports = jwtTokenGenerator;
