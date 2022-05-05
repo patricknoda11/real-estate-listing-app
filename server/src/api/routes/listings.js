@@ -1,8 +1,8 @@
 "use strict";
 
 const express = require("express");
-const { query } = require("../db.js");
-const pool = require("../db.js");
+const { query } = require("../utils/db.js");
+const pool = require("../utils/db.js");
 const router = express.Router();
 
 // TODO: Selection
