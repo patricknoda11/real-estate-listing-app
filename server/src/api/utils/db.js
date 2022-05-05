@@ -1,9 +1,8 @@
-"use strict";
-
 const mysql = require("mysql2/promise");
 const env = require("dotenv");
 env.config();
 
+/** Initiates query pool for mySQL database */
 const pool = mysql.createPool({
   host: process.env.MYSQL_HOST,
   port: process.env.MYSQL_PORT,
