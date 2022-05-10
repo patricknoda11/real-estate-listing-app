@@ -1,4 +1,4 @@
-w.flex-container-about {
+.flex-container-about {
 	position: relative;
 	margin: 3.5rem;
 	padding: 2rem;
@@ -17,6 +17,7 @@ w.flex-container-about {
 	}
 
 	ul {
+		margin-left: 5rem;
 		text-indent: 2rem;
 		font-size: 2rem;
 	}
