@@ -32,7 +32,7 @@ const AgentAnalytics = () => {
 
 	return (
 		<div className="flex-container-agent-analytics">
-			<h1>Highest Priced Listings For Each Agent</h1>
+			<h1>Agent Listing Analytics</h1>
 			<div className="content">
 				<form onSubmit={onSubmitForm}>
 					<label>Minimum Listings Agent Must Have</label>
