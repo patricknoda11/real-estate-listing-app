@@ -1,37 +1,25 @@
-"use strict";
-
-const express = require("express");
-const cors = require("cors");
-const env = require("dotenv");
-const homeRoute = require("./api/middleware/home");
-const agentRoute = require("./api/middleware/agent");
-const agentAnalyticsRoute = require("./api/middleware/agent-analytics");
-const learnMoreRoute = require("./api/middleware/learn-more");
-const buyerRoute = require("./api/middleware/buyer");
-const appointmentRoute = require("./api/middleware/appt");
-const listingsRoute = require("./api/middleware/listings");
-const listingRoute = require("./api/middleware/listing");
-const listingsAnalyticsRoute = require("./api/middleware/listings-analytics");
-const ownerRoute = require("./api/middleware/owner");
+const express = require('express');
+const cors = require('cors');
+const env = require('dotenv');
+const listingsAnalyticsRoute = require('./api/routes/listings-analytics');
+const agentRoute = require('./api/routes/agent');
+const agentAnalyticsRoute = require('./api/routes/agent-analytics');
+const listingsRoute = require('./api/routes/listings');
 const app = express();
 env.config();
 
 const PORT = process.env.SERVER_PORT || 5012;
 
-// add middleware/routess
+// ADD MIDDLEWARE:
 app.use(cors());
 app.use(express.json());
-// app.use("/", homeRoute);
-// app.use("/user/buyer", buyerRoute);
-// app.use("/appt", appointmentRoute);
-app.use("/user/owner", ownerRoute);
-app.use("/listings/analytics", listingsAnalyticsRoute);
-app.use("/user/agents", agentRoute);
-app.use("/user/agents/analytics", agentAnalyticsRoute);
-app.use("/listings", listingsRoute);
-app.use("/listings", learnMoreRoute);
-app.use("/listing", listingRoute);
+
+// ADD ROUTES:
+app.use('/listings/analytics', listingsAnalyticsRoute);
+app.use('/listings', listingsRoute);
+app.use('/user/agents/analytics', agentAnalyticsRoute);
+app.use('/user/agents', agentRoute);
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+	console.log(`Server running on port ${PORT}`);
 });
