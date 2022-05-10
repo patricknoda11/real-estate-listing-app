@@ -15,10 +15,10 @@ app.use(cors());
 app.use(express.json());
 
 // ADD ROUTES:
-app.use('/listings', listingsRoute);
 app.use('/listings/analytics', listingsAnalyticsRoute);
-app.use('/user/agents', agentRoute);
+app.use('/listings', listingsRoute);
 app.use('/user/agents/analytics', agentAnalyticsRoute);
+app.use('/user/agents', agentRoute);
 
 app.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`);

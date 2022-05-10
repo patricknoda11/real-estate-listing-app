@@ -1,5 +1,6 @@
 const express = require('express');
 const url = require('url');
+const pool = require('../db');
 const router = express.Router();
 
 /** Get certain listings */
@@ -76,7 +77,7 @@ router.post('/', async (request, response) => {
 router.get('/:listingAddress', async (request, response) => {
 	try {
 		const GET_LISTING_DETAIL_QUERY =
-			'SELECT phoneNumber, Agent.agentEmail, name, yearsExperience, price, ListingHas.listingAdress, location, type, numberOfRooms, numberOfBathrooms, interiorSize, landSize FROM Agent, ListingHas, PropertyHas WHERE Agent.agentEmail=ListingHas.agentEmail AND ListingHas.listingAddress=PropertyHas.listingAddress AND ListingHas.listingAddress=?';
+			'SELECT phoneNumber, Agent.agentEmail, name, yearsExperience,  preferredInPersonMeetingLocation, preferredMeetingDuration, price, ListingHas.listingAddress, location, type, numberOfRooms, numberOfBathrooms, interiorSize, landSize FROM Agent, ListingHas, PropertyHas WHERE Agent.agentEmail=ListingHas.agentEmail AND ListingHas.listingAddress=PropertyHas.listingAddress AND ListingHas.listingAddress=?';
 		const { listingAddress } = request.params;
 		const queryResponse = await pool.query(GET_LISTING_DETAIL_QUERY, [
 			listingAddress,
@@ -92,9 +93,9 @@ router.put('/:listingAddress', async (request, response) => {
 	const connection = await pool.getConnection();
 	try {
 		const UPDATE_LISTING_QUERY =
-			'UPDATE ListingHas SET price=? WHERE listingAddress=?;';
+			'UPDATE ListingHas SET price=? WHERE listingAddress=?';
 		const UPDATE_PROPERTY_QUERY =
-			'UPDATE PropertyHas SET type=?, numberOfRooms=?, numberOfBathrooms=?, interiorSize=?, landSize=? WHERE listingAddress=? AND location=?;';
+			'UPDATE PropertyHas SET type=?, numberOfRooms=?, numberOfBathrooms=?, interiorSize=?, landSize=? WHERE listingAddress=?';
 		const { listingAddress } = request.params;
 		const {
 			price,
@@ -103,7 +104,7 @@ router.put('/:listingAddress', async (request, response) => {
 			numberOfBathrooms,
 			interiorSize,
 			landSize,
-			location,
+			password,
 		} = request.body;
 		await connection.query('START TRANSACTION');
 		await connection.query(UPDATE_LISTING_QUERY, [price, listingAddress]);
@@ -114,12 +115,12 @@ router.put('/:listingAddress', async (request, response) => {
 			interiorSize,
 			landSize,
 			listingAddress,
-			location,
 		]);
 		await connection.query('COMMIT');
 		connection.release();
 		response.status(200).send(`Listing on ${listingAddress}, was updated`);
 	} catch (error) {
+		console.log(error.message);
 		await connection.query('ROLLBACK');
 		connection.release();
 		response.status(400).send(error.message);
