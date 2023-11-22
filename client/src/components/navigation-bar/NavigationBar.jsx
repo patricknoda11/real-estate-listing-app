@@ -8,6 +8,9 @@ import './NavigationBar.scss';
 // Other Imports:
 import Logo from '../../assets/logo.png';
 
+/**
+ * Reusuable Navigation Bar Component Utlizing react-bootstrap
+ */
 const NavigationBar = () => {
   const location = useLocation();
 

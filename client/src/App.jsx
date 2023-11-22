@@ -25,7 +25,7 @@ import Layout from './views/layout/Layout.jsx';
 import FadeInWrapper from './components/wrappers/FadeInWrapper.jsx';
 
 /**
- * Main Component which sets up the routing for the application
+ * Main Component which sets up the routing for the entire application
  */
 const App = () => {
   return (
