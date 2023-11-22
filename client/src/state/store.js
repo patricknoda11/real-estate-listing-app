@@ -7,8 +7,8 @@ import ListingsSlice from './slices/listingsSlice';
 // Configure Store:
 const store = configureStore({
   reducer: {
-    agents: AgentsSlice.reducer,
-    listings: ListingsSlice.reducer,
+    agents: AgentsSlice,
+    listings: ListingsSlice,
   },
 });
 

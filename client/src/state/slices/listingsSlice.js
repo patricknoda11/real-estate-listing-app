@@ -47,6 +47,7 @@ const listingsSlice = createSlice({
 });
 
 // Export Listings Actions:
-export const listingsActions = listingsSlice.actions;
+export const { addListing, removeListing, updateListing, retrieveListings } =
+  listingsSlice.actions;
 
-export default listingsSlice;
+export default listingsSlice.reducer;

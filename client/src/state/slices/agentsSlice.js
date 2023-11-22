@@ -47,6 +47,7 @@ const agentsSlice = createSlice({
 });
 
 // Export Agents Actions:
-export const agentsActions = agentsSlice.actions;
+export const { addAgent, removeAgent, updateAgent, retrieveAgents } =
+  agentsSlice.actions;
 
 export default agentsSlice.reducer;
