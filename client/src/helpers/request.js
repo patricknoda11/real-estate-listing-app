@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+// Constants:
+const HOST = process.env.REACT_APP_BACKEND_HOST;
+const PORT = process.env.REACT_APP_BACKEND_PORT;
+
 /**
  * Sends an HTTP request to the backend server.
  * @param {string} type - The type of the request (get, post, put, delete).
@@ -8,9 +12,7 @@ import axios from 'axios';
  * @returns {Promise} - A promise that resolves to the response of the request.
  */
 export default sendRequest = async (type, url, payload = {}) => {
-  const baseUrl = process.env.REACT_APP_BACKEND_URL;
-
-  const fullUrl = `${baseUrl}/${url}`;
+  const fullUrl = `http://${HOST}:${PORT}/${url}`;
 
   switch (type.toLowerCase()) {
     case 'get':
