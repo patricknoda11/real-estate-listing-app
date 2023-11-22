@@ -11,7 +11,7 @@ export class AgentsService {
    * @returns {Promise}
    */
   static async getAgent(id) {
-    return sendRequest('get', `agents/${id}`);
+    return sendRequest('get', `user/agents/${id}`);
   }
 
   /**
@@ -20,7 +20,7 @@ export class AgentsService {
    * @returns {Promise}
    */
   static async addAgent(payload) {
-    return sendRequest('post', 'agents', payload);
+    return sendRequest('post', 'user/agents', payload);
   }
 
   /**
@@ -29,7 +29,7 @@ export class AgentsService {
    * @returns {Promise}
    */
   static async removeAgent(id) {
-    return sendRequest('delete', `agents/${id}`);
+    return sendRequest('delete', `user/agents/${id}`);
   }
 
   /**
@@ -39,7 +39,7 @@ export class AgentsService {
    * @returns {Promise}
    */
   static async updateAgent(id, payload) {
-    return sendRequest('put', `agents/${id}`, payload);
+    return sendRequest('put', `user/agents/${id}`, payload);
   }
 
   /**

@@ -1,30 +1,30 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const CreateListingTab = () => {
-  const [ownerPhoneNumber, setOwnerPhoneNumber] = useState("");
-  const [ownerName, setOwnerName] = useState("");
-  const [listingAddress, setListingAddress] = useState("");
-  const [agentEmail, setAgentEmail] = useState("");
-  const [price, setPrice] = useState("");
-  const [location, setLocation] = useState("");
-  const [type, setType] = useState("");
-  const [numberOfRooms, setNumberOfRooms] = useState("");
-  const [numberOfBathrooms, setNumberOfBathrooms] = useState("");
-  const [interiorSize, setInteriorSize] = useState("");
-  const [landSize, setLandSize] = useState("");
+  const [ownerPhoneNumber, setOwnerPhoneNumber] = useState('');
+  const [ownerName, setOwnerName] = useState('');
+  const [listingAddress, setListingAddress] = useState('');
+  const [agentEmail, setAgentEmail] = useState('');
+  const [price, setPrice] = useState('');
+  const [location, setLocation] = useState('');
+  const [type, setType] = useState('');
+  const [numberOfRooms, setNumberOfRooms] = useState('');
+  const [numberOfBathrooms, setNumberOfBathrooms] = useState('');
+  const [interiorSize, setInteriorSize] = useState('');
+  const [landSize, setLandSize] = useState('');
 
   const clearEntries = () => {
-    setOwnerPhoneNumber("");
-    setOwnerName("");
-    setListingAddress("");
-    setAgentEmail("");
-    setPrice("");
-    setLocation("");
-    setType("");
-    setNumberOfRooms("");
-    setNumberOfBathrooms("");
-    setInteriorSize("");
-    setLandSize("");
+    setOwnerPhoneNumber('');
+    setOwnerName('');
+    setListingAddress('');
+    setAgentEmail('');
+    setPrice('');
+    setLocation('');
+    setType('');
+    setNumberOfRooms('');
+    setNumberOfBathrooms('');
+    setInteriorSize('');
+    setLandSize('');
   };
 
   const onSubmitForm = async (e) => {
@@ -43,13 +43,13 @@ const CreateListingTab = () => {
         interiorSize,
         landSize,
       };
-      await fetch("http://localhost:5013/listing/", {
-        method: "POST",
-        mode: "cors",
-        headers: { "Content-Type": "application/json" },
+      await fetch('http://localhost:5013/listing/', {
+        method: 'POST',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
-      alert("The listing specified has been created");
+      alert('The listing specified has been created');
       clearEntries();
     } catch (error) {
       alert(error.message);

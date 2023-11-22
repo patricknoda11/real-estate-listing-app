@@ -1,24 +1,20 @@
 .flex-container-about {
-	position: relative;
-	margin: 3.5rem;
-	padding: 2rem;
-	border-radius: 0.5rem;
-	max-width: 100%;
-	max-height: 100%;
-	word-wrap: break-word;
-	overflow-y: auto;
-	background-color: aliceblue;
-	opacity: 0.9;
+  position: relative; // or you can omit this for static positioning
+  margin: 3.5rem;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: aliceblue;
+  opacity: 0.9;
 
-	h1 {
-		font-weight: bolder;
-		font-size: 5rem;
-		margin: 1rem;
-	}
+  h1 {
+    font-weight: bolder;
+    font-size: 5rem;
+    margin: 1rem;
+  }
 
-	ul {
-		margin-left: 5rem;
-		text-indent: 2rem;
-		font-size: 2rem;
-	}
+  ul {
+    margin-left: 5rem;
+    text-indent: 2rem;
+    font-size: 2rem;
+  }
 }
