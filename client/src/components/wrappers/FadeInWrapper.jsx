@@ -14,7 +14,6 @@ const FadeInWrapper = ({ children }) => {
 
   useEffect(() => {
     setFade(true);
-    // Optionally reset fade on route change
     return () => setFade(false);
   }, []);
 

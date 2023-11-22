@@ -4,11 +4,9 @@ import './About.scss';
 // About page View
 const About = () => {
   return (
-    <div className="flex-container-about">
+    <div className="container-about">
       <h2>
-        <strong>
-          Welcome to Vancouver's Premier Real Estate Listing Platform!
-        </strong>
+        <strong>Welcome to Vancouver's Real Estate Listing Platform</strong>
       </h2>
       <p>
         Nestled in the heart of one of the world's most beautiful cities, our
@@ -31,37 +29,31 @@ const About = () => {
         <strong>About the Developer</strong>
       </h2>
       <p>
-        Patrick Noda, a third-year Computer Science student at the University of
-        British Columbia, is the creative force behind this innovative Real
-        Estate Listing Application. Balancing academic excellence with a wealth
-        of practical experience, Patrick has demonstrated exceptional prowess in
-        software development, distinguishing himself as a talented and dedicated
-        individual in the field. In his professional journey, Patrick's role as
-        a Full-Stack Software Engineer at OnTraccr Technologies stands out.
-        Here, he honed his skills in developing reliable features for thousands
-        of users, employing modern frameworks such as ReactJs, React Native, and
-        HapiJs. His experience in creating and reviewing various testing
-        procedures, including load testing and unit testing using tools like K6
-        and Jest, has been instrumental in enhancing the robustness and
-        reliability of our Real Estate Listing Application.
+        I'm Patrick Noda, currently in my third year of Computer Science at the
+        University of British Columbia. My journey in software development,
+        particularly through my role as a Full-Stack Software Engineer at
+        OnTraccr Technologies, has been a rewarding learning experience. There,
+        I've been fortunate to contribute to developing features for our users,
+        working with technologies like ReactJs, React Native, and HapiJs. My
+        involvement in testing processes, including load and unit testing with
+        tools such as K6 and Jest, has helped me understand the importance of
+        creating reliable software. The Real Estate Listing Application, to
+        which I've been contributing since January 2022, is a project that I
+        hold close to my heart. Launched in early 2022, it has been a platform
+        for continuous learning and improvement for me.
         <br />
         <br />
-        This application, a collaborative project to which Patrick has been
-        contributing since January 2022, stands as a testament to his technical
-        expertise and commitment to innovation. Initially launched in early
-        2022, Patrick has continuously sought to enhance and refine the
-        platform. The recent improvements made to the application reflect his
-        dedication to evolving and advancing the technology in response to user
-        needs and industry trends. It features a full-stack design,
-        sophisticated client-server interactions, and efficient database
-        management, all underscored by Patrick's ability to create user-centric
-        software solutions that adapt and grow over time.
+        This application showcases a full-stack design, client-server
+        interactions, and database management. It's a reflection not just of
+        technical skills, but also of a commitment to creating software that
+        meets user needs and keeps pace with industry trends. I'm always eager
+        to learn and grow, and I welcome feedback and ideas that can help evolve
+        this platform.
         <br />
-        <br />
-        Discover more about Patrick's professional journey and contributions by
-        connecting with him on GitHub and LinkedIn. Explore his portfolio for
-        deeper insights into his expertise and the impact of his work in the
-        realm of computer science.
+        <br />I invite you to connect with me on GitHub and LinkedIn to learn
+        more about my professional path and projects. Feel free to explore my
+        portfolio for a closer look at my work and its impact in the field of
+        computer science.
       </p>
     </div>
   );

@@ -1,0 +1,11 @@
+.list-container {
+  height: 100%;
+  .list {
+    overflow-y: auto;
+    min-height: 90%;
+  }
+
+  .pagination {
+    display: flex;
+  }
+}

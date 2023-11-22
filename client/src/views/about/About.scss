@@ -1,7 +1,7 @@
 @import '../../styles/shared.scss';
 
-.flex-container-about {
-  @extend .flex-container-fixed;
+.container-about {
+  @extend .container-fixed;
 
   h1 {
     font-weight: bolder;

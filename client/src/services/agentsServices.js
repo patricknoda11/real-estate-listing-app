@@ -1,4 +1,4 @@
-import sendRequest from '../helpers/request';
+import sendRequest from '../utils/request';
 
 /**
  * This class contains methods for communicating with the backend server

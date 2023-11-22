@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useLocation,
 } from 'react-router-dom';
+import { message } from 'antd';
 
 // Import Styles:
 import './App.scss';
@@ -23,6 +24,9 @@ import Layout from './views/layout/Layout.jsx';
 
 // Import Components:
 import FadeInWrapper from './components/wrappers/FadeInWrapper.jsx';
+
+// Other Imports:
+import MapListings from './views/search-listings/MapListings.jsx';
 
 /**
  * Main Component which sets up the routing for the entire application
@@ -52,7 +56,8 @@ const App = () => {
             path="listings"
             element={
               <FadeInWrapper>
-                <Listings />
+                {/* <Listings /> */}
+                <MapListings />
               </FadeInWrapper>
             }
           />
@@ -72,30 +77,33 @@ const App = () => {
               </FadeInWrapper>
             }
           />
-          <Route
+          {/* TODO: Add Listing Analytics Page */}
+          {/* <Route
             path="listings/analytics"
             element={
               <FadeInWrapper>
                 <ListingsAnalytics />
               </FadeInWrapper>
             }
-          />
-          <Route
+          /> */}
+          {/* TODO: Add Agent Login Page */}
+          {/* <Route
             path="user/agents"
             element={
               <FadeInWrapper>
                 <Agent />
               </FadeInWrapper>
             }
-          />
-          <Route
+          /> */}
+          {/* TODO: Add Agent Analytics Page */}
+          {/* <Route
             path="user/agents/analytics"
             element={
               <FadeInWrapper>
                 <AgentAnalytics />
               </FadeInWrapper>
             }
-          />
+          /> */}
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

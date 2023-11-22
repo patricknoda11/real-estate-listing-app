@@ -52,7 +52,7 @@ const NavigationBar = () => {
             add
           </NavDropdown.Item>
         </NavDropdown>
-        <Nav.Item>
+        {/* <Nav.Item>
           <NavLink
             to="/listings/analytics"
             className="nav-link"
@@ -60,8 +60,8 @@ const NavigationBar = () => {
           >
             Listing-Analytics
           </NavLink>
-        </Nav.Item>
-        <Nav.Item>
+        </Nav.Item> */}
+        {/* <Nav.Item>
           <NavLink
             to="/user/agents/analytics"
             className="nav-link"
@@ -69,12 +69,12 @@ const NavigationBar = () => {
           >
             Agent-Analytics
           </NavLink>
-        </Nav.Item>
-        <NavDropdown title="User" className="nav-link">
+        </Nav.Item> */}
+        {/* <NavDropdown title="User" className="nav-link">
           <NavDropdown.Item as={NavLink} to="/user/agents">
             Agent
           </NavDropdown.Item>
-        </NavDropdown>
+        </NavDropdown> */}
       </Nav>
     </Navbar>
   );
