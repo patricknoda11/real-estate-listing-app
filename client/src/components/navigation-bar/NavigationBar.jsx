@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { NavLink, useLocation } from 'react-router-dom';
 
@@ -11,11 +11,13 @@ import Logo from '../../assets/logo.png';
 const NavigationBar = () => {
   const location = useLocation();
 
-  const isDropdownActive = (paths) => {
-    console.log('line14', paths);
-    console.log('line15', location.pathname);
-    return paths.includes(location.pathname);
-  };
+  const isDropdownActive = (paths) => paths.includes(location.pathname);
+
+  // Scroll to top of page when navigating to a new page:
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <Navbar bg="dark" variant="dark" className="navbar">
       <Navbar.Brand href="/">
