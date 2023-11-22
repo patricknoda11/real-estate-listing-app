@@ -1,10 +1,7 @@
+@import '../../styles/shared.scss';
+
 .flex-container-about {
-  position: relative; // or you can omit this for static positioning
-  margin: 3.5rem;
-  padding: 2rem;
-  border-radius: 0.5rem;
-  background-color: aliceblue;
-  opacity: 0.9;
+  @extend .flex-container-fixed;
 
   h1 {
     font-weight: bolder;
