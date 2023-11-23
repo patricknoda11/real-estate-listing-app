@@ -3,6 +3,12 @@ const env = require('dotenv');
 
 env.config();
 
+// Constants:
+const poolMaxLimit = process.env.MYSQL_POOL_MAX
+  ? parseInt(process.env.MYSQL_POOL_MAX)
+  : 10;
+
+// Configure Database Connection Pool using Knex:
 const knexInstance = knex({
   client: 'mysql2',
   connection: {
@@ -14,8 +20,7 @@ const knexInstance = knex({
   },
   pool: {
     min: 0,
-    max: process.env.MYSQL_CONNECTION_LIMIT,
-    queueLimit: process.env.MYSQL_QUEUE_LIMIT
+    max: poolMaxLimit
   },
   debug: false // set to true if you want to see SQL queries in console
 });
