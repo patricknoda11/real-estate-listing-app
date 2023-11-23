@@ -12,7 +12,6 @@ const MapBoundsComponent = ({ onBoundsChange }) => {
     if (!map) return;
     // Utilization of Map instance:
     const bounds = map.getBounds();
-    console.log('line15', bounds);
     onBoundsChange(bounds);
   }, [map]);
 

@@ -23,9 +23,6 @@ const MapListings = () => {
   const { pathname } = useLocation();
   const visible = pathname === '/listings';
 
-  // Map Ref:
-  const mapRef = useRef();
-
   // STATE ---------------------------------------------------------
   // Global State:
   const listings = useSelector((state) => state.listings.listings);

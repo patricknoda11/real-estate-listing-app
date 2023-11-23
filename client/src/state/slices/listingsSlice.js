@@ -29,7 +29,7 @@ const listingsSlice = createSlice({
     },
     retrieveListings(state, action) {
       const retrievedListings = action.payload ?? {};
-      state.listings = retrievedListings;
+      state.listings = { ...state.listings, ...retrievedListings };
     },
   },
 });

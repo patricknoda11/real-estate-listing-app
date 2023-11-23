@@ -65,11 +65,9 @@ CREATE TABLE AppointmentRequestsResponds(
 
 CREATE TABLE ListingHas (
     id VARCHAR(36) NOT NULL,
-	listingAddress VARCHAR(256),
 	agentEmail VARCHAR(256),
 	price INT,
 	PRIMARY KEY (id),
-    UNIQUE (listingAddress),
 	FOREIGN KEY (agentEmail) REFERENCES Agent(agentEmail)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
@@ -77,7 +75,11 @@ CREATE TABLE ListingHas (
 
 CREATE TABLE PropertyHas (
     listingId VARCHAR(36) NOT NULL,
-    location VARCHAR(256),
+    listingAddress VARCHAR(256),
+    city VARCHAR(256),
+    region VARCHAR(256),
+    country VARCHAR(256),
+    zipCode VARCHAR(256),
     type VARCHAR(256),
     numberOfBedrooms INT,
     numberOfBathrooms INT,
@@ -85,7 +87,7 @@ CREATE TABLE PropertyHas (
     landSize INT,
     latitude DECIMAL(9,6),
     longitude DECIMAL(10,6),
-    PRIMARY KEY (listingId, location),
+    PRIMARY KEY (listingId, listingAddress),
     FOREIGN KEY (listingId) REFERENCES ListingHas(id)
     ON DELETE CASCADE
     ON UPDATE CASCADE

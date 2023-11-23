@@ -9,32 +9,32 @@ import { Card, Image } from 'antd';
  * */
 const ListingEntry = ({ children }) => {
   const {
-    address,
+    listingAddress,
+    city,
+    zipCode,
     price,
     type,
-    numRooms,
+    numBedrooms,
     numBathrooms,
     interiorSize,
     landSize,
-    imageUrl,
+    url,
   } = children;
   return (
     <Card
       hoverable
       style={{ width: '100%', height: '10%' }}
       cover={
-        imageUrl ? (
-          <Image alt="listing-thumbnail" src={imageUrl} width={240} />
-        ) : null
+        url ? <Image alt="listing-thumbnail" src={url} width={240} /> : null
       }
     >
       <Card.Meta
-        title={address}
+        title={`${listingAddress}, ${city}, ${zipCode}`}
         description={
           <>
             <p>Price: ${price}</p>
             <p>Type: {type}</p>
-            <p>Rooms: {numRooms}</p>
+            <p>Rooms: {numBedrooms}</p>
             <p>Bathrooms: {numBathrooms}</p>
             <p>Interior Size: {interiorSize} sqft</p>
             <p>Land Size: {landSize} sqft</p>

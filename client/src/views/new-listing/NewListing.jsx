@@ -43,13 +43,14 @@ const NewListing = () => {
 
     try {
       // Try to create a new listing:
-      await dispatch(createNewListing(formInputs));
+      const res = await dispatch(createNewListing(formInputs));
+      if (res) {
+        clearEntries();
+        message.success('Listing successfully created');
+      }
     } catch (error) {
       // display message on error:
       message.error(error.message);
-    } finally {
-      // Clear entries
-      clearEntries();
     }
   };
 

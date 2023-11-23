@@ -1,7 +1,8 @@
 const knex = require('../config/db');
 
-const { generateUniqueId } = require('../utils/general');
+const { generateUniqueId, getLatLng } = require('../utils/general');
 const { createPermanentFileUrl } = require('../utils/file');
+const { consolidateListings } = require('../utils/listingsControllersHelpers');
 
 /**
  * Controller which returns all listings in the database.
@@ -16,17 +17,23 @@ const getListings = async (req, res) => {
       .select(
         'id',
         'agentEmail',
-        'ListingHas.listingAddress',
         'price',
         'type',
+        'listingAddress',
         knex.ref('numberOfBathrooms').as('numBathrooms'),
-        knex.ref('numberOfRooms').as('numBedrooms'),
+        knex.ref('numberOfBedrooms').as('numBedrooms'),
         'interiorSize',
         'landSize',
-        'location',
-        'ImageHas.url'
+        'city',
+        'region',
+        'country',
+        'zipCode',
+        'latitude',
+        'longitude',
+        'ImageHas.url',
+        'ImageHas.thumbnail'
       )
-      .join('PropertyHas', 'ListingHas.id', '=', 'PropertyHas.listingId')
+      .leftJoin('PropertyHas', 'ListingHas.id', '=', 'PropertyHas.listingId')
       .leftJoin('ImageHas', function () {
         this.on('ListingHas.id', '=', 'ImageHas.listingId').andOn(
           'ImageHas.thumbnail',
@@ -50,15 +57,18 @@ const getListings = async (req, res) => {
     }
 
     // Execute Query:
-    const listings = await query;
+    const rawListings = await query;
+
+    // Consolidate Listings:
+    const consolidatedListingsMap = consolidateListings(rawListings);
 
     // Send Response:
-    res.status(200).json({ data: listings });
+    res.status(200).json(consolidatedListingsMap);
   } catch (error) {
     // Log Error Message:
     console.error('Error retrieving listings: ' + error);
     // Send Error Message to Client:
-    res.status(400).json({ error: error.message });
+    res.status(400).json(error.message);
   }
 };
 
@@ -69,24 +79,28 @@ const createNewListing = async (req, res) => {
   try {
     const {
       listingAddress,
-      agentEmail,
+      zipCode,
+      city,
+      region,
+      country,
       price,
-      location,
       type,
-      numberOfRooms,
-      numberOfBathrooms,
+      numBedrooms,
+      numBathrooms,
       interiorSize,
       landSize,
+      agentEmail,
       files = []
     } = req.body;
+    const addedImageUrls = [];
 
     // Generate unique id for listing & determine coordinates:
     const listingId = generateUniqueId();
     const { latitude, longitude } = await getLatLng({
       address: listingAddress,
-      city: location,
-      zipcode: '00000',
-      country: 'Canada'
+      city,
+      zipcode: zipCode,
+      country
     });
 
     // Start Transaction and Rollback if Error Occurs:
@@ -94,18 +108,21 @@ const createNewListing = async (req, res) => {
       // Insert Listing:
       await trx('ListingHas').insert({
         id: listingId,
-        listingAddress,
         agentEmail,
         price
       });
 
       // Insert Property:
       await trx('PropertyHas').insert({
+        listingId,
         listingAddress,
-        location,
+        city,
+        region,
+        country,
+        zipCode,
         type,
-        numberOfRooms,
-        numberOfBathrooms,
+        numberOfBedrooms: numBedrooms,
+        numberOfBathrooms: numBathrooms,
         interiorSize,
         landSize,
         latitude,
@@ -115,22 +132,32 @@ const createNewListing = async (req, res) => {
       // Insert all Images:
       const imagesToInsert = files.map(({ fileName, isThumbnail }) => {
         const permanentFileUrl = createPermanentFileUrl(fileName);
+        addedImageUrls.push({
+          url: permanentFileUrl,
+          thumbnail: isThumbnail
+        });
         return {
           listingId,
           url: permanentFileUrl,
           thumbnail: isThumbnail
         };
       });
-      await trx('ImageHas').insert(imagesToInsert);
+      if (imagesToInsert.length) await trx('ImageHas').insert(imagesToInsert);
     });
 
     // Send Response with Newly Created Listing ID:
-    res.status(200).json({ data: listingId });
+    res.status(200).json({
+      ...req.body,
+      id: listingId,
+      latitude,
+      longitude,
+      images: addedImageUrls
+    });
   } catch (error) {
     // Log Error Message:
     console.error('Error creating listing: ' + error);
     // Send Error Message to Client:
-    res.status(400).json({ error: error.message });
+    res.status(400).json(error.message);
   }
 };
 
@@ -182,7 +209,7 @@ const getListing = async (request, response) => {
     // Log Error Message:
     console.error('Error fetching listing details:', error);
     // Send Error Message to Client:
-    response.status(400).json({ error: error.message });
+    response.status(400).json(error.message);
   }
 };
 
@@ -204,12 +231,12 @@ const deleteListing = async (req, res) => {
     await knex('ListingHas').where('id', id).del();
 
     // Send Response:
-    res.status(200).json({ data: id });
+    res.status(200).json(id);
   } catch (error) {
     // Log Error Message:
     console.error('Error deleting listing:', error);
     // Send Error Message to Client:
-    res.status(400).json({ error: error.message });
+    res.status(400).json(error.message);
   }
 };
 

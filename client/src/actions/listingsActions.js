@@ -19,6 +19,7 @@ export const getListing = (listingId) => async (dispatch) => {
     type: addListing,
     payload: retrievedListing,
   });
+  return true;
 };
 
 /**
@@ -27,13 +28,13 @@ export const getListing = (listingId) => async (dispatch) => {
  */
 export const createNewListing = (listing) => async (dispatch) => {
   // Communicate with server to add listing:
-  const constructedListing = await ListingsService.addListing(listing);
-
+  const { data: newListing } = await ListingsService.addListing(listing);
   // Update the global state with newly created listing:
   dispatch({
     type: addListing,
-    payload: constructedListing,
+    payload: newListing,
   });
+  return true;
 };
 
 /**
@@ -49,6 +50,7 @@ export const deleteExistingListing = (listingId) => async (dispatch) => {
     type: removeListing,
     payload: listingId,
   });
+  return true;
 };
 
 /**
@@ -64,6 +66,7 @@ export const updateExistingListing = (listing) => async (dispatch) => {
     type: updateListing,
     payload: updatedListing,
   });
+  return true;
 };
 
 /**
@@ -71,11 +74,11 @@ export const updateExistingListing = (listing) => async (dispatch) => {
  */
 export const getAllListings = () => async (dispatch) => {
   // Communicate with server to retrieve listings:
-  const retrievedListings = await ListingsService.retrieveListings();
-
+  const { data: retrievedListings } = await ListingsService.retrieveListings();
   // Update the global state with retrieved listings:
   dispatch({
     type: retrieveListings,
     payload: retrievedListings,
   });
+  return true;
 };

@@ -1,4 +1,8 @@
-import sendRequest from '../utils/request';
+import {
+  getPresignedURL,
+  sendRequest,
+  uploadFilesToS3,
+} from '../utils/request';
 
 /**
  * This class contains methods for communicating with the backend server
@@ -20,6 +24,12 @@ export class ListingsService {
    * @returns {Promise}
    */
   static async addListing(payload) {
+    const { files = [] } = payload ?? {};
+
+    // Upload files to S3:
+    if (files.length) await uploadFilesToS3(files);
+
+    // Send Request to Server to Save Listing:
     return sendRequest('post', 'listings', payload);
   }
 

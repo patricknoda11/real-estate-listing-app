@@ -20,7 +20,7 @@ const FormInput = ({
       type={type}
       placeholder={placeholder}
       className={inputClass}
-      value={value}
+      value={value ?? ''}
       onChange={onChange}
       required={required}
     />

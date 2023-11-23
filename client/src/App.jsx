@@ -22,14 +22,17 @@ import MapListings from './views/search-listings/MapListings.jsx';
 
 // Import Actions:
 import { getAllListings } from './actions/listingsActions.js';
+import { useDispatch } from 'react-redux';
 
 /**
  * Main Component which sets up the routing for the entire application
  */
 const App = () => {
+  const dispatch = useDispatch();
+
   // Retrieve initial details from server, on application load:
   useEffect(() => {
-    getAllListings();
+    dispatch(getAllListings());
   }, []);
 
   return (
