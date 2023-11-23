@@ -83,6 +83,8 @@ CREATE TABLE PropertyHas (
     numberOfBathrooms INT,
     interiorSize INT,
     landSize INT,
+    latitude DECIMAL(9,6),
+    longitude DECIMAL(10,6),
     PRIMARY KEY (listingId, location),
     FOREIGN KEY (listingId) REFERENCES ListingHas(id)
     ON DELETE CASCADE

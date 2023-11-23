@@ -80,7 +80,7 @@ const createNewListing = async (req, res) => {
       files = []
     } = req.body;
 
-    // Generate unique id for listing:
+    // Generate unique id for listing & determine coordinates:
     const listingId = generateUniqueId();
     const { latitude, longitude } = await getLatLng({
       address: listingAddress,
@@ -107,7 +107,9 @@ const createNewListing = async (req, res) => {
         numberOfRooms,
         numberOfBathrooms,
         interiorSize,
-        landSize
+        landSize,
+        latitude,
+        longitude
       });
 
       // Insert all Images:
