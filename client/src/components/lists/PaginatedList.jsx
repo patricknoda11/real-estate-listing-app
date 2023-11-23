@@ -1,22 +1,33 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Col, List, Pagination, Row } from 'antd';
-import { useSelector } from 'react-redux';
 import ListingEntry from './ListingEntry';
+
+// Constants:
+const PAGE_SIZE = 5;
 
 /**
  * Reusable Paginated List Component
  */
 const PaginatedList = ({ visible, data }) => {
-  const [currPage, setCurrPage] = useState(0);
+  const [currPage, setCurrPage] = useState(1);
+
+  // Currently displayed listings, based off current page:
+  const displayedListings = useMemo(
+    () => data.slice((currPage - 1) * PAGE_SIZE, currPage * PAGE_SIZE),
+    [data, currPage]
+  );
 
   // On page-change handler:
-  const onPageChange = useCallback((page) => setCurrPage(page), []);
+  const onPageChange = useCallback((page) => {
+    // page is 1-indexed:
+    setCurrPage(page);
+  }, []);
 
   // Reset local state on visibility change:
   useEffect(() => {
     if (visible) return;
-    setCurrPage(0);
+    setCurrPage(1);
   }, [visible]);
 
   return (
@@ -28,7 +39,7 @@ const PaginatedList = ({ visible, data }) => {
       >
         <div className="list" style={{ flexGrow: 1, overflowY: 'auto' }}>
           <List
-            dataSource={data}
+            dataSource={displayedListings}
             renderItem={(listing) => <ListingEntry>{listing}</ListingEntry>}
           />
         </div>
@@ -37,6 +48,7 @@ const PaginatedList = ({ visible, data }) => {
           style={{ justifyContent: 'center', paddingBottom: 10 }}
         >
           <Pagination
+            defaultPageSize={PAGE_SIZE}
             current={currPage}
             total={data.length}
             onChange={onPageChange}
