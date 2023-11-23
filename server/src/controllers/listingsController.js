@@ -82,6 +82,12 @@ const createNewListing = async (req, res) => {
 
     // Generate unique id for listing:
     const listingId = generateUniqueId();
+    const { latitude, longitude } = await getLatLng({
+      address: listingAddress,
+      city: location,
+      zipcode: '00000',
+      country: 'Canada'
+    });
 
     // Start Transaction and Rollback if Error Occurs:
     await knex.transaction(async (trx) => {

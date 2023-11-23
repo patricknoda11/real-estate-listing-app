@@ -64,7 +64,7 @@ CREATE TABLE AppointmentRequestsResponds(
 );
 
 CREATE TABLE ListingHas (
-    id INT NOT NULL VARCHAR(36),
+    id VARCHAR(36) NOT NULL,
 	listingAddress VARCHAR(256),
 	agentEmail VARCHAR(256),
 	price INT,
@@ -83,18 +83,18 @@ CREATE TABLE PropertyHas (
     numberOfBathrooms INT,
     interiorSize INT,
     landSize INT,
-    PRIMARY KEY(listingId, location),
-    FOREIGN KEY(listingId) REFERENCES ListingHas(listingId)
+    PRIMARY KEY (listingId, location),
+    FOREIGN KEY (listingId) REFERENCES ListingHas(id)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
 
 CREATE TABLE ImageHas (
-    url VARCHAR(2048) NOT NULL,
+    url VARCHAR(256) NOT NULL,
     thumbnail BOOLEAN DEFAULT 0,
     listingId VARCHAR(36) NOT NULL,
-    Primary Key (url),
-    FOREIGN KEY (listingId) REFERENCES ListingHas(listingId)
+    PRIMARY KEY (url),
+    FOREIGN KEY (listingId) REFERENCES ListingHas(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
