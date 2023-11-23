@@ -19,10 +19,10 @@ app.use(cors());
 app.use(express.json());
 
 // ADD ROUTES:
-app.use('/listings/analytics', listingsAnalyticsRoute);
+// app.use('/listings/analytics', listingsAnalyticsRoute);
 app.use('/listings', listingsRoute);
-app.use('/user/agents/analytics', agentAnalyticsRoute);
-app.use('/user/agents', agentRoute);
+// app.use('/user/agents/analytics', agentAnalyticsRoute);
+// app.use('/user/agents', agentRoute);
 app.use('/s3/presigned-urls', s3Route);
 
 app.listen(PORT, () => {
