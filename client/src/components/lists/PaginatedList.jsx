@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Col, List, Pagination, Row } from 'antd';
 import { useSelector } from 'react-redux';
+import ListingEntry from './ListingEntry';
 
 /**
  * Reusable Paginated List Component
@@ -25,10 +26,10 @@ const PaginatedList = ({ visible, data }) => {
         span={24}
         style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
       >
-        <div className="list" style={{ flex: 1, overflowY: 'auto' }}>
+        <div className="list" style={{ flexGrow: 1, overflowY: 'auto' }}>
           <List
             dataSource={data}
-            renderItem={(item) => <List.Item>{item}</List.Item>}
+            renderItem={(listing) => <ListingEntry>{listing}</ListingEntry>}
           />
         </div>
         <div

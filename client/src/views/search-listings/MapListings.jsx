@@ -96,7 +96,7 @@ const MapListings = () => {
           onClusterMarkerClick={onClusterMarkerClick}
         />
       </Col>
-      <Col span={8}>
+      <Col span={8} style={{ height: '100%' }}>
         <PaginatedList visible={visible} data={visibleListings} />
       </Col>
     </Row>
