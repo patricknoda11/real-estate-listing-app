@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Col, List, Pagination, Row } from 'antd';
+import { useSelector } from 'react-redux';
 
 /**
  * Reusable Paginated List Component
