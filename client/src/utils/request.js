@@ -11,7 +11,7 @@ const PORT = process.env.REACT_APP_BACKEND_PORT;
  * @param {Object} payload - The data to send with the request.
  * @returns {Promise} - A promise that resolves to the response of the request.
  */
-export default sendRequest = async (type, url, payload = {}) => {
+export default async (type, url, payload = {}) => {
   const fullUrl = `http://${HOST}:${PORT}/${url}`;
 
   switch (type.toLowerCase()) {

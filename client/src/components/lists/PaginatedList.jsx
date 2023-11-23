@@ -24,11 +24,10 @@ const PaginatedList = ({ visible, data }) => {
     setCurrPage(page);
   }, []);
 
-  // Reset local state on visibility change:
+  // Reset local state on visibility change OR if data displayed on map changes:
   useEffect(() => {
-    if (visible) return;
     setCurrPage(1);
-  }, [visible]);
+  }, [visible, data]);
 
   return (
     <Row style={{ height: '100%' }}>

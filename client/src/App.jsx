@@ -1,11 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from 'react-router-dom';
-import { message } from 'antd';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Import Styles:
 import './App.scss';
@@ -24,14 +18,20 @@ import Layout from './views/layout/Layout.jsx';
 
 // Import Components:
 import FadeInWrapper from './components/wrappers/FadeInWrapper.jsx';
-
-// Other Imports:
 import MapListings from './views/search-listings/MapListings.jsx';
+
+// Import Actions:
+import { getAllListings } from './actions/listingsActions.js';
 
 /**
  * Main Component which sets up the routing for the entire application
  */
 const App = () => {
+  // Retrieve initial details from server, on application load:
+  useEffect(() => {
+    getAllListings();
+  }, []);
+
   return (
     <Router>
       <Routes>
@@ -56,7 +56,6 @@ const App = () => {
             path="listings"
             element={
               <FadeInWrapper>
-                {/* <Listings /> */}
                 <MapListings />
               </FadeInWrapper>
             }

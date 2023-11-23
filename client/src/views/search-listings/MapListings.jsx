@@ -14,7 +14,7 @@ import Map from '../../components/map/Map';
 import PaginatedList from '../../components/lists/PaginatedList';
 
 // Other Imports
-import { isLatLngInMapBounds } from '../../helpers/helpers';
+import { isLatLngInMapBounds } from '../../utils/helpers';
 
 /**
  * MapListings View - combines a map and list view of real estate listings

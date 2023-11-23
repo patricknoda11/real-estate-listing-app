@@ -1,161 +1,192 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { message } from 'antd';
+
+// Import Styles:
 import './NewListing.scss';
 
+// Import Components:
+import FormInput from '../../components/form/FormInput';
+
+// Import Actions:
+import { createNewListing } from '../../actions/listingsActions';
+
+/**
+ * Create New Listing View
+ *   - Allows the user to create a new listing
+ */
 const NewListing = () => {
-  const POST_REQUEST_ROUTE = 'http://localhost:5013/listings/';
-  const [listingAddress, setListingAddress] = useState('');
-  const [agentEmail, setAgentEmail] = useState('');
-  const [price, setPrice] = useState('');
-  const [location, setLocation] = useState('');
-  const [type, setType] = useState('');
-  const [numberOfRooms, setNumberOfRooms] = useState('');
-  const [numberOfBathrooms, setNumberOfBathrooms] = useState('');
-  const [interiorSize, setInteriorSize] = useState('');
-  const [landSize, setLandSize] = useState('');
+  const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  const visible = pathname === '/new-listing';
 
-  const clearEntries = () => {
-    setListingAddress('');
-    setAgentEmail('');
-    setPrice('');
-    setLocation('');
-    setType('');
-    setNumberOfRooms('');
-    setNumberOfBathrooms('');
-    setInteriorSize('');
-    setLandSize('');
-  };
+  // STATE ---------------------------------------------------------
+  // Local State:
+  const [formInputs, setFormInputs] = useState({});
 
+  // HANDLERS ------------------------------------------------------
+  // Add form inputs to local state:
+  const addFormInputs = (key) => (e) =>
+    setFormInputs((existingInputs) => ({
+      ...existingInputs,
+      [key]: e.target.value,
+    }));
+
+  // Clears form entries:
+  const clearEntries = () => setFormInputs({});
+
+  // On form submit handler:
   const onSubmitForm = async (e) => {
+    // Prevent pages from refreshing:
     e.preventDefault();
+
     try {
-      const body = {
-        listingAddress,
-        agentEmail,
-        price,
-        location,
-        type,
-        numberOfRooms,
-        numberOfBathrooms,
-        interiorSize,
-        landSize,
-      };
-      await fetch(POST_REQUEST_ROUTE, {
-        method: 'POST',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
+      // Try to create a new listing:
+      await dispatch(createNewListing(formInputs));
     } catch (error) {
-      alert(error.message);
+      // display message on error:
+      message.error(error.message);
     } finally {
+      // Clear entries
       clearEntries();
     }
   };
+
+  // EFFECTS -------------------------------------------------------
+  // Clear form entries when the component is no longer visible:
+  useEffect(() => {
+    if (!visible) {
+      clearEntries();
+    }
+  }, [visible]);
 
   return (
     <div className="container-new-listings">
       <h1>Create Listing</h1>
       <div className="content">
         <form onSubmit={onSubmitForm}>
-          <div className="form-group">
-            <label>Listing Address</label>
-            <input
-              type="text"
-              placeholder="e.g. 12345 Alma St"
-              className="form-control"
-              value={listingAddress}
-              onChange={(e) => setListingAddress(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Agent Email</label>
-            <input
-              type="email"
-              placeholder="e.g. dakotajohnson@gmail.com"
-              className="form-control"
-              value={agentEmail}
-              onChange={(e) => setAgentEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Price</label>
-            <input
-              type="number"
-              placeholder="e.g. 1000000"
-              className="form-control"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Location</label>
-            <input
-              type="text"
-              placeholder="e.g. Vancouver, BC"
-              className="form-control"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Type</label>
-            <input
-              type="text"
-              placeholder="e.g. Duplex"
-              className="form-control"
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Number Of Bedrooms</label>
-            <input
-              type="number"
-              placeholder="e.g. 5"
-              className="form-control"
-              value={numberOfRooms}
-              onChange={(e) => setNumberOfRooms(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Number of Bathrooms</label>
-            <input
-              type="number"
-              placeholder="e.g. 4"
-              className="form-control"
-              value={numberOfBathrooms}
-              onChange={(e) => setNumberOfBathrooms(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Interior Size (sq-ft)</label>
-            <input
-              type="number"
-              placeholder="e.g. 5000"
-              className="form-control"
-              value={interiorSize}
-              onChange={(e) => setInteriorSize(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Land Size (sq-ft)</label>
-            <input
-              type="number"
-              placeholder="e.g. 10000"
-              className="form-control"
-              value={landSize}
-              onChange={(e) => setLandSize(e.target.value)}
-              required
-            />
-          </div>
+          <FormInput
+            containerClass="form-group"
+            label="Listing Address"
+            type="text"
+            placeholder="e.g. 12345 Alma St"
+            inputClass="form-control"
+            value={formInputs.listingAddress}
+            onChange={addFormInputs('listingAddress')}
+            required
+          />
+          <FormInput
+            containerClass="form-group"
+            label="Zip/Postal Code"
+            type="text"
+            placeholder="e.g. V3X1L1"
+            inputClass="form-control"
+            value={formInputs.zipCode}
+            onChange={addFormInputs('zipCode')}
+            required
+          />
+          <FormInput
+            containerClass="form-group"
+            label="Agent Email"
+            inputClass="form-control"
+            type="email"
+            placeholder="e.g. dakotajohnson@gmail.com"
+            className="form-control"
+            value={formInputs.agentEmail}
+            onChange={addFormInputs('agentEmail')}
+            required
+          />
+          <FormInput
+            containerClass="form-group"
+            label="Price"
+            inputClass="form-control"
+            type="number"
+            placeholder="e.g. 1000000"
+            value={formInputs.price}
+            onChange={addFormInputs('price')}
+            required
+          />
+          <FormInput
+            containerClass="form-group"
+            label="City"
+            inputClass="form-control"
+            type="text"
+            placeholder="e.g. Vancouver"
+            value={formInputs.city}
+            onChange={addFormInputs('city')}
+            required
+          />
+          <FormInput
+            containerClass="form-group"
+            label="Region/Province"
+            inputClass="form-control"
+            type="text"
+            placeholder="e.g. British Columbia"
+            value={formInputs.region}
+            onChange={addFormInputs('region')}
+            required
+          />
+          <FormInput
+            containerClass="form-group"
+            label="Country"
+            inputClass="form-control"
+            type="text"
+            placeholder="e.g. Canada"
+            value={formInputs.country}
+            onChange={addFormInputs('country')}
+            required
+          />
+          <FormInput
+            containerClass="form-group"
+            label="Type"
+            inputClass="form-control"
+            type="text"
+            placeholder="e.g. Duplex"
+            value={formInputs.type}
+            onChange={addFormInputs('type')}
+            required
+          />
+          <FormInput
+            containerClass="form-group"
+            label="Number Of Bedrooms"
+            inputClass="form-control"
+            type="number"
+            placeholder="e.g. 5"
+            value={formInputs.numBedrooms}
+            onChange={addFormInputs('numBedrooms')}
+            required
+          />
+          <FormInput
+            containerClass="form-group"
+            label="Number of Bathrooms"
+            inputClass="form-control"
+            type="number"
+            placeholder="e.g. 4"
+            value={formInputs.numBathrooms}
+            onChange={addFormInputs('numBathrooms')}
+            required
+          />
+          <FormInput
+            containerClass="form-group"
+            label="Interior Size (sq-ft)"
+            inputClass="form-control"
+            type="number"
+            placeholder="e.g. 5000"
+            value={formInputs.interiorSize}
+            onChange={addFormInputs('interiorSize')}
+            required
+          />
+          <FormInput
+            containerClass="form-group"
+            label="Land Size (sq-ft)"
+            inputClass="form-control"
+            type="number"
+            placeholder="e.g. 10000"
+            value={formInputs.landSize}
+            onChange={addFormInputs('landSize')}
+            required
+          />
           <button className="btn btn-success">Create</button>
         </form>
       </div>
