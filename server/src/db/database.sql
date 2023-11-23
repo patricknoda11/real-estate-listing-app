@@ -79,7 +79,7 @@ CREATE TABLE PropertyHas (
     listingId VARCHAR(36) NOT NULL,
     location VARCHAR(256),
     type VARCHAR(256),
-    numberOfRooms INT,
+    numberOfBedrooms INT,
     numberOfBathrooms INT,
     interiorSize INT,
     landSize INT,
@@ -90,7 +90,8 @@ CREATE TABLE PropertyHas (
 );
 
 CREATE TABLE ImageHas (
-    url: VARCHAR(2048) NOT NULL,
+    url VARCHAR(2048) NOT NULL,
+    thumbnail BOOLEAN DEFAULT 0,
     listingId VARCHAR(36) NOT NULL,
     Primary Key (url),
     FOREIGN KEY (listingId) REFERENCES ListingHas(listingId)
