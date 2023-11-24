@@ -1,20 +1,45 @@
 .navbar {
   width: 100%;
+  height: 10vh;
   padding: 0.5rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #262525;
-  font-size: large;
+  font-size: medium;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 
   .logo {
     width: 20%;
     height: 20%;
   }
 
-  .links {
-    :hover {
-      text-shadow: 0.5px 0.5px aliceblue;
+  .nav-item {
+    display: flex;
+    align-items: center;
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      &:hover {
+        text-shadow: 0.5px 0.5px aliceblue;
+      }
+      &.active {
+        color: #ffffff;
+        font-weight: bold;
+      }
     }
+
+    .active-dropdown {
+      color: #ffffff;
+      font-weight: bold;
+    }
+  }
+
+  .dropdown-toggle {
+    display: flex;
+    align-items: center;
   }
 }

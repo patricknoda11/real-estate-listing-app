@@ -1,24 +1,17 @@
-.flex-container-about {
-	position: relative;
-	margin: 3.5rem;
-	padding: 2rem;
-	border-radius: 0.5rem;
-	max-width: 100%;
-	max-height: 100%;
-	word-wrap: break-word;
-	overflow-y: auto;
-	background-color: aliceblue;
-	opacity: 0.9;
+@import '../../styles/shared.scss';
 
-	h1 {
-		font-weight: bolder;
-		font-size: 5rem;
-		margin: 1rem;
-	}
+.container-about {
+  @extend .container-fixed;
 
-	ul {
-		margin-left: 5rem;
-		text-indent: 2rem;
-		font-size: 2rem;
-	}
+  h1 {
+    font-weight: bolder;
+    font-size: 5rem;
+    margin: 1rem;
+  }
+
+  ul {
+    margin-left: 5rem;
+    text-indent: 2rem;
+    font-size: 2rem;
+  }
 }

@@ -1,8 +1,11 @@
-.flex-container-home {
+.container-home {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 8rem;
+  border-radius: 0.5rem;
+
   h1 {
     font-weight: bolder;
     font-size: 3rem;

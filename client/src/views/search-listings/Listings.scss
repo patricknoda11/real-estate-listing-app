@@ -1,4 +1,4 @@
-.flex-container-listings {
+.container-listings {
   position: relative;
   margin: 3.5rem;
   padding: 3rem;
@@ -22,4 +22,12 @@
       margin: 1rem 0rem;
     }
   }
+}
+
+.map-container-listings {
+  position: relative;
+  height: 90vh;
+  width: 100%;
+  background-color: rgba(255, 255, 255);
+  z-index: 10;
 }
